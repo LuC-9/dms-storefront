@@ -1,0 +1,96 @@
+import type { Config } from "tailwindcss";
+
+const config: Config = {
+  darkMode: ["class"],
+  content: [
+    "./app/**/*.{ts,tsx}",
+    "./components/**/*.{ts,tsx}",
+    "./lib/**/*.{ts,tsx}",
+  ],
+  theme: {
+    container: {
+      center: true,
+      padding: "1rem",
+      screens: {
+        "2xl": "80rem",
+      },
+    },
+    fontFamily: {
+      display: ["var(--font-display)", "sans-serif"],
+      sans: ["var(--font-body)", "sans-serif"],
+      mono: ["var(--font-mono)", "monospace"],
+    },
+    fontSize: {
+      "2xs": "0.65rem",
+      xs: "0.75rem",
+      sm: "0.875rem",
+      base: "1rem",
+      xl: "1.25rem",
+      "3xl": "1.875rem",
+      "4xl": "2.25rem",
+      "6xl": "3.75rem",
+    },
+    extend: {
+      borderRadius: {
+        none: "0",
+        DEFAULT: "0",
+        sm: "0",
+        md: "0",
+        lg: "0",
+        xl: "0",
+        "2xl": "0",
+        full: "9999px",
+      },
+      colors: {
+        "forge-950": "#0D1B2A",
+        "iron-800": "#1A3148",
+        primary: {
+          50: "#eff6ff",
+          100: "#dbeafe",
+          200: "#bfdbfe",
+          300: "#93c5fd",
+          400: "#60a5fa",
+          500: "#3b82f6",
+          600: "#2563eb",
+          700: "#1d4ed8",
+          800: "#1e3a8a",
+          900: "#172554",
+          DEFAULT: "#1e3a8a",
+          foreground: "#ffffff",
+        },
+        accent: {
+          50: "#fffbeb",
+          100: "#fef3c7",
+          200: "#fde68a",
+          300: "#fcd34d",
+          400: "#fbbf24",
+          500: "#f59e0b",
+          600: "#d97706",
+          700: "#b45309",
+          800: "#92400e",
+          900: "#78350f",
+          DEFAULT: "#f59e0b",
+          foreground: "#111827",
+        },
+        steel: {
+          50: "#f7f9fb",
+          100: "#edf2f7",
+          200: "#d7e0e8",
+          300: "#b6c4d0",
+          400: "#7f95a8",
+          500: "#45637A",
+          600: "#3d5568",
+          700: "#2d455a",
+          800: "#1a3148",
+          900: "#0f2436",
+        },
+        "blueprint-100": "#DCE8F2",
+        "safety-orange": "#CC5500",
+        "alloy-white": "#F0F4F8",
+      },
+    },
+  },
+  plugins: [],
+};
+
+export default config;

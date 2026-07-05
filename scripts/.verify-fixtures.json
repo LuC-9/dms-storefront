@@ -1,0 +1,47 @@
+{
+  "prefix": "verify-refund-1783233585641",
+  "password": "VerifyRefund123!",
+  "customer": {
+    "id": "cmr7f8gtj00008b4c818ehic7",
+    "email": "verify-refund-1783233585641@customer.test"
+  },
+  "customer2": {
+    "id": "cmr7f8gtm00018b4c2tlyppct",
+    "email": "verify-refund-1783233585641-other@customer.test"
+  },
+  "superAdmin": {
+    "id": "cmr7f8gto00028b4c7df3d83d",
+    "username": "verify-refund-1783233585641-super"
+  },
+  "manager": {
+    "id": "cmr7f8gtq00038b4cai4wdq7s",
+    "username": "verify-refund-1783233585641-manager"
+  },
+  "product": {
+    "id": "cmr7f8gtt00058b4cchno3o7z"
+  },
+  "orderA": {
+    "id": "cmr7f8gtw00078b4cm9q79s4g",
+    "orderNumber": "verify-refund-1783233585641-A",
+    "userId": "cmr7f8gtj00008b4c818ehic7",
+    "totalInPaise": 50000
+  },
+  "orderB": {
+    "id": "cmr7f8gtz000b8b4ctc2fuqzp",
+    "orderNumber": "verify-refund-1783233585641-B",
+    "userId": "cmr7f8gtj00008b4c818ehic7",
+    "totalInPaise": 50000
+  },
+  "orderC": {
+    "id": "cmr7f8gu2000g8b4chn8runu1",
+    "orderNumber": "verify-refund-1783233585641-C",
+    "userId": "cmr7f8gtj00008b4c818ehic7",
+    "totalInPaise": 50000
+  },
+  "orderD": {
+    "id": "cmr7f8gu5000l8b4cmjw8xfg3",
+    "orderNumber": "verify-refund-1783233585641-D",
+    "userId": "cmr7f8gtj00008b4c818ehic7",
+    "totalInPaise": 50000
+  }
+}

@@ -1,0 +1,100 @@
+[
+  {
+    "scenario": 1,
+    "name": "Customer cancels PENDING unpaid order A",
+    "request": "POST /api/orders/verify-refund-1783233585641-A/cancel {\"reason\":\"Changed my mind\"}",
+    "status": 200,
+    "bodySummary": "ok=true",
+    "dbDelta": "status PENDING->CANCELLED, refunds=0",
+    "pass": true,
+    "expected": "200, CANCELLED, no refund",
+    "actual": "match"
+  },
+  {
+    "scenario": 2,
+    "name": "Customer cancels CONFIRMED paid order B",
+    "request": "POST /api/orders/verify-refund-1783233585641-B/cancel {\"reason\":\"Other: found faster shipping\"}",
+    "status": 200,
+    "bodySummary": "ok=true",
+    "dbDelta": "status->CANCELLED, refund=50000, payment=REFUNDED",
+    "pass": true
+  },
+  {
+    "scenario": 3,
+    "name": "Customer cancel refused on PROCESSING order C",
+    "request": "POST /api/orders/verify-refund-1783233585641-C/cancel",
+    "status": 409,
+    "bodySummary": "error.code=INVALID_STATUS_FOR_CUSTOMER_CANCEL",
+    "dbDelta": "status unchanged: PROCESSING",
+    "pass": true,
+    "expected": "409 INVALID_STATUS_FOR_CUSTOMER_CANCEL",
+    "actual": "409 INVALID_STATUS_FOR_CUSTOMER_CANCEL"
+  },
+  {
+    "scenario": 4,
+    "name": "Customer cancel refused for different user",
+    "request": "POST /api/orders/verify-refund-1783233585641-A2/cancel as customer2",
+    "status": 403,
+    "bodySummary": "error.code=FORBIDDEN",
+    "dbDelta": "status unchanged: PENDING",
+    "pass": true
+  },
+  {
+    "scenario": 5,
+    "name": "Admin FULL refund + cancel on order C",
+    "request": "POST /api/admin/orders/cmr7f8gu2000g8b4chn8runu1/refund FULL cancelOrder=true",
+    "status": 200,
+    "bodySummary": "ok=true",
+    "dbDelta": "status PROCESSING->CANCELLED, refund type=undefined, initiatedBy=undefined",
+    "pass": false
+  },
+  {
+    "scenario": 6,
+    "name": "Admin PARTIAL refunds summing to total on order E",
+    "request": "POST partial 400, 600, then 100 (expect 422)",
+    "status": 422,
+    "bodySummary": "6a=200 6b=200 6c=422 code=AMOUNT_EXCEEDS_REMAINING",
+    "dbDelta": "payment after partials: REFUNDED, refunds=2",
+    "pass": true,
+    "expected": "200,200,422 AMOUNT_EXCEEDS_REMAINING",
+    "actual": "200,200,422 AMOUNT_EXCEEDS_REMAINING"
+  },
+  {
+    "scenario": 7,
+    "name": "Admin refund rejected for MANAGER role",
+    "request": "POST /api/admin/orders/cmr7f8gu5000l8b4cmjw8xfg3/refund as MANAGER",
+    "status": 403,
+    "bodySummary": "error.code=FORBIDDEN",
+    "dbDelta": "no change expected",
+    "pass": true
+  },
+  {
+    "scenario": 8,
+    "name": "Admin cancel-and-refund refused on DELIVERED order D",
+    "request": "POST /api/admin/orders/cmr7f8gu5000l8b4cmjw8xfg3/refund cancelOrder=true",
+    "status": 409,
+    "bodySummary": "error.code=ORDER_ALREADY_DELIVERED",
+    "dbDelta": "status=DELIVERED, payment=COMPLETED",
+    "pass": true
+  },
+  {
+    "scenario": 9,
+    "name": "Refund history endpoints",
+    "request": "GET customer B refunds + admin C refunds",
+    "status": 200,
+    "bodySummary": "cust total=50000 remain=0; admin total=50000",
+    "dbDelta": "cust refunds=1, admin refunds=1",
+    "pass": true
+  },
+  {
+    "scenario": 10,
+    "name": "Admin dashboard refund stats",
+    "request": "GET /api/admin/stats",
+    "status": 200,
+    "bodySummary": "refundsThisMonth count=4 total=101000",
+    "dbDelta": "aggregate query",
+    "pass": true,
+    "expected": "count>=3",
+    "actual": "4"
+  }
+]
