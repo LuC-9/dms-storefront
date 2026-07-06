@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 import { ProductForm } from "@/components/admin/product-form";
 import { DeleteButton } from "@/components/admin/delete-button";
+import { CsvImportDialog } from "@/components/admin/csv-import-dialog";
 import { requireAdminSession } from "@/lib/rbac";
 import { formatInr } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -26,11 +27,19 @@ export default async function AdminProductsPage() {
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-wrap items-center justify-between gap-3">
         <h1 className="text-2xl font-bold">Products</h1>
-        <Button asChild>
-          <Link href="/admin/products/new">New Product</Link>
-        </Button>
+        <div className="flex flex-wrap items-center gap-2">
+          <Button asChild size="sm" variant="outline">
+            <a href="/api/admin/products/export" download="products-export.csv">
+              Export CSV
+            </a>
+          </Button>
+          <CsvImportDialog />
+          <Button asChild>
+            <Link href="/admin/products/new">New Product</Link>
+          </Button>
+        </div>
       </div>
       <Table>
         <TableHeader>

@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Price } from "@/components/storefront/price";
+import { ReorderButton } from "@/components/storefront/reorder-button";
 
 type OrderRow = {
   orderNumber: string;
@@ -103,12 +104,15 @@ export default function AccountOrdersPage() {
                   {order.paymentStatus}
                 </span>
               </div>
-              <Link
-                href={`/account/orders/${order.orderNumber}`}
-                className="mt-3 inline-flex text-sm text-iron-800 underline-offset-4 hover:underline"
-              >
-                View details →
-              </Link>
+              <div className="mt-3 flex flex-wrap items-center gap-3">
+                <Link
+                  href={`/account/orders/${order.orderNumber}`}
+                  className="text-sm text-iron-800 underline-offset-4 hover:underline"
+                >
+                  View details →
+                </Link>
+                <ReorderButton orderNumber={order.orderNumber} size="sm" />
+              </div>
             </article>
           ))}
         </div>
