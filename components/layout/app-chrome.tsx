@@ -8,6 +8,7 @@ import { CustomerSessionProvider } from "@/components/storefront/customer-sessio
 import { CartProvider } from "@/components/storefront/cart-context";
 import { CartDrawer } from "@/components/storefront/cart-drawer";
 import { Toaster } from "@/components/ui/toast";
+import { CompareBar } from "@/components/storefront/compare-toggle";
 
 const pageVariants = {
   initial: { opacity: 0, y: 8 },
@@ -52,6 +53,7 @@ export function AppChrome({ children }: { children: React.ReactNode }) {
         </AnimatePresence>
         <SiteFooter />
         <CartDrawer />
+        <CompareBar />
         <Toaster />
       </CartProvider>
     </CustomerSessionProvider>
