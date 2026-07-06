@@ -9,6 +9,7 @@ import { OrderTimeline } from "@/components/admin/order-timeline";
 import { Price } from "@/components/storefront/price";
 import { CancelOrderDialog } from "@/components/orders/CancelOrderDialog";
 import { RefundStatusSection } from "@/components/orders/RefundStatusSection";
+import { ReorderButton } from "@/components/storefront/reorder-button";
 
 type OrderDetail = {
   id: string;
@@ -98,13 +99,20 @@ export default function AccountOrderDetailPage() {
             <h1 className="font-display text-3xl font-bold uppercase tracking-[0.08em] md:text-4xl">{order.orderNumber}</h1>
             <p className="mt-1 text-sm text-steel-500">Placed on {new Date(order.createdAt).toLocaleString("en-IN")}</p>
           </div>
-          <div className="flex gap-2">
+          <div className="flex flex-wrap items-center gap-2">
             <span className="border border-steel-500 bg-blueprint-100 px-2 py-1 font-mono text-xs uppercase tracking-[0.03em] text-iron-800">
               {order.status}
             </span>
             <span className="border border-steel-500/30 px-2 py-1 font-mono text-xs uppercase tracking-[0.03em] text-steel-500">
               {order.paymentStatus}
             </span>
+            <Link
+              href={`/orders/${order.orderNumber}/invoice`}
+              className="border border-steel-500/40 px-2 py-1 font-mono text-xs uppercase tracking-[0.03em] text-steel-500 hover:border-iron-800 hover:text-iron-800"
+            >
+              Download Invoice
+            </Link>
+            <ReorderButton orderNumber={order.orderNumber} />
           </div>
         </div>
         {(order.status === "SHIPPED" || order.status === "DELIVERED") && (
