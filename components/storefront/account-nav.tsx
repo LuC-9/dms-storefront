@@ -7,6 +7,8 @@ const links = [
   { href: "/account", label: "Profile" },
   { href: "/account/addresses", label: "Addresses" },
   { href: "/account/orders", label: "Orders" },
+  { href: "/account/wishlist", label: "Wishlist" },
+  { href: "/account/quotes", label: "Quotes" },
 ];
 
 export function AccountNav() {
