@@ -106,6 +106,13 @@ export const StockNotificationSchema = z.object({
   productId: z.string().cuid(),
 });
 
+export const EnquirySchema = z.object({
+  name: z.string().trim().min(2).max(100),
+  company: z.string().trim().max(100).optional(),
+  phone: z.string().trim().min(6).max(20),
+  message: z.string().trim().min(10).max(2000),
+});
+
 export function apiError(code: string, message: string, status: number) {
   return {
     status,

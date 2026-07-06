@@ -43,11 +43,32 @@ const itemVariants = {
 
 export default function ContactPage() {
   const [sent, setSent] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const [form, setForm] = useState({ name: "", company: "", phone: "", message: "" });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSent(true);
+    setSubmitting(true);
+    setError(null);
+    try {
+      const res = await fetch("/api/enquiries", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}));
+        const msg = (data as { error?: { message?: string } }).error?.message ?? "Failed to send. Please try again.";
+        setError(msg);
+        return;
+      }
+      setSent(true);
+    } catch {
+      setError("Network error. Please check your connection and try again.");
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -205,12 +226,16 @@ export default function ContactPage() {
                       placeholder="Describe your requirement — product names, quantities, specifications…"
                     />
                   </div>
+                  {error && (
+                    <p className="text-sm text-red-600">{error}</p>
+                  )}
                   <Button
                     type="submit"
-                    className="w-full rounded-none border border-safety-orange bg-safety-orange font-display uppercase tracking-[0.05em] text-alloy-white hover:bg-safety-orange/90"
+                    disabled={submitting}
+                    className="w-full rounded-none border border-safety-orange bg-safety-orange font-display uppercase tracking-[0.05em] text-alloy-white hover:bg-safety-orange/90 disabled:opacity-60"
                   >
                     <Send className="mr-2 h-4 w-4" />
-                    Send enquiry
+                    {submitting ? "Sending…" : "Send enquiry"}
                   </Button>
                 </form>
               )}

@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useSession } from "next-auth/react";
-import { LayoutGrid, Package, ShoppingBag, Tags, Users, UserRound } from "lucide-react";
+import { LayoutGrid, Package, ShoppingBag, Tags, Users, UserRound, MessageSquare } from "lucide-react";
 import { cn } from "@/lib/utils";
 import type { AdminRole } from "@/lib/rbac";
 
@@ -20,6 +20,7 @@ const roleNavigation: Record<AdminRole, AdminNavItem[]> = {
     { href: "/admin/products", label: "Products", icon: Package },
     { href: "/admin/categories", label: "Categories", icon: Tags },
     { href: "/admin/employees", label: "Employees", icon: UserRound },
+    { href: "/admin/enquiries", label: "Enquiries", icon: MessageSquare },
     { href: "/admin/users", label: "Admin Users", icon: Users },
   ],
   ADMIN: [
@@ -28,11 +29,13 @@ const roleNavigation: Record<AdminRole, AdminNavItem[]> = {
     { href: "/admin/products", label: "Products", icon: Package },
     { href: "/admin/categories", label: "Categories", icon: Tags },
     { href: "/admin/employees", label: "Employees", icon: UserRound },
+    { href: "/admin/enquiries", label: "Enquiries", icon: MessageSquare },
   ],
   MANAGER: [
     { href: "/admin", label: "Dashboard", icon: LayoutGrid },
     { href: "/admin/orders", label: "Orders", icon: ShoppingBag },
     { href: "/admin/employees", label: "Employees", icon: UserRound },
+    { href: "/admin/enquiries", label: "Enquiries", icon: MessageSquare },
   ],
   EMPLOYEE: [{ href: "/admin/orders/mine", label: "My Orders", icon: ShoppingBag }],
 };

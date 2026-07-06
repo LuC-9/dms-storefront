@@ -264,6 +264,19 @@ model Refund {
   @@index([createdAt])
 }
 
+model Enquiry {
+  id        String   @id @default(cuid())
+  name      String
+  company   String?
+  phone     String
+  message   String
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+
+  @@index([createdAt])
+  @@index([expiresAt])
+}
+
 model Employee {
   id          String             @id @default(cuid())
   name        String
