@@ -1,12 +1,24 @@
 "use client";
 
 import { usePathname } from "next/navigation";
+import { AnimatePresence, motion } from "framer-motion";
 import { SiteHeader } from "@/components/storefront/site-header";
 import { SiteFooter } from "@/components/storefront/site-footer";
 import { CustomerSessionProvider } from "@/components/storefront/customer-session-provider";
 import { CartProvider } from "@/components/storefront/cart-context";
 import { CartDrawer } from "@/components/storefront/cart-drawer";
 import { Toaster } from "@/components/ui/toast";
+
+const pageVariants = {
+  initial: { opacity: 0, y: 8 },
+  enter: { opacity: 1, y: 0 },
+  exit: { opacity: 0, y: -4 },
+};
+
+const pageTransition = {
+  duration: 0.28,
+  ease: [0.22, 1, 0.36, 1] as [number, number, number, number],
+};
 
 export function AppChrome({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
@@ -25,9 +37,19 @@ export function AppChrome({ children }: { children: React.ReactNode }) {
     <CustomerSessionProvider>
       <CartProvider>
         <SiteHeader />
-        <main key={pathname} className="min-h-[70vh] animate-page-enter motion-reduce:animate-none">
-          {children}
-        </main>
+        <AnimatePresence mode="wait" initial={false}>
+          <motion.main
+            key={pathname}
+            className="min-h-[70vh]"
+            variants={pageVariants}
+            initial="initial"
+            animate="enter"
+            exit="exit"
+            transition={pageTransition}
+          >
+            {children}
+          </motion.main>
+        </AnimatePresence>
         <SiteFooter />
         <CartDrawer />
         <Toaster />

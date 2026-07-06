@@ -10,6 +10,8 @@ body {
   @apply bg-blueprint-100 font-sans text-iron-800 antialiased;
 }
 
+/* --- Legacy CSS animations (kept for cart-bounce and badge-pop) --- */
+
 @keyframes badge-pop {
   from {
     transform: scale(0);
@@ -52,6 +54,7 @@ body {
   }
 }
 
+/* Kept for legacy/non-Framer usages */
 .reveal-init {
   opacity: 0;
   transform: translateY(16px);
@@ -69,10 +72,25 @@ body {
   animation: cart-bounce 420ms ease-out;
 }
 
+/* --- Focus & interaction --- */
+
 button:active,
 a[role="button"]:active {
   opacity: 0.85;
 }
+
+input,
+textarea,
+select {
+  @apply outline-none;
+}
+
+input:focus-visible,
+textarea:focus-visible {
+  @apply ring-1 ring-safety-orange ring-offset-0;
+}
+
+/* --- Reduced motion override --- */
 
 @media (prefers-reduced-motion: reduce) {
   *,
@@ -86,4 +104,9 @@ a[role="button"]:active {
     opacity: 1;
     transform: none;
   }
+}
+
+/* --- Utility: safety-orange/8 background via opacity --- */
+.bg-safety-orange\/8 {
+  background-color: rgb(204 85 0 / 0.08);
 }
