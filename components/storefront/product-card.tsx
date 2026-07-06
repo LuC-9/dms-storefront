@@ -8,6 +8,8 @@ import { Price } from "@/components/storefront/price";
 import { AddToCartButton } from "@/components/storefront/add-to-cart-button";
 import { SpecPlate } from "@/components/storefront/spec-plate";
 import { getSkuLabel, getSpecLabel } from "@/components/storefront/product-spec";
+import { WishlistToggle } from "@/components/storefront/wishlist-toggle";
+import { CompareToggle } from "@/components/storefront/compare-toggle";
 
 type ProductCardProps = {
   product: Product & { category?: Category };
@@ -40,6 +42,9 @@ export function ProductCard({ product }: ProductCardProps) {
             Enquire
           </span>
         )}
+        <div className="absolute left-2 top-2 z-10">
+          <WishlistToggle productId={product.id} />
+        </div>
       </div>
       <div className="flex flex-1 flex-col gap-3 p-4">
         <p className="font-mono text-[0.6rem] uppercase tracking-[0.08em] text-steel-500">
@@ -77,6 +82,15 @@ export function ProductCard({ product }: ProductCardProps) {
               →
             </motion.span>
           </Link>
+          <CompareToggle
+            product={{
+              id: product.id,
+              name: product.name,
+              slug: product.slug,
+              imageUrl: product.imageUrl,
+              priceInPaise: product.priceInPaise,
+            }}
+          />
         </div>
       </div>
     </motion.article>
