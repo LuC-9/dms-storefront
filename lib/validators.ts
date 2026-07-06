@@ -113,6 +113,26 @@ export const EnquirySchema = z.object({
   message: z.string().trim().min(10).max(2000),
 });
 
+export const QuoteRequestSchema = z.object({
+  productId: z.string().cuid(),
+  quantity: z.number().int().min(1).max(999),
+  deliveryDate: z.string().datetime().optional(),
+  notes: z.string().trim().max(2000).optional(),
+  guestName: z.string().trim().max(100).optional(),
+  guestEmail: z.string().trim().email().optional(),
+  guestPhone: z.string().trim().max(20).optional(),
+});
+
+export const QuoteStatusUpdateSchema = z.object({
+  status: z.enum(["QUOTED", "ACCEPTED", "REJECTED", "EXPIRED"]),
+  quotedPrice: z.number().int().positive().optional(),
+  adminNotes: z.string().trim().max(2000).optional(),
+});
+
+export const WishlistItemSchema = z.object({
+  productId: z.string().cuid(),
+});
+
 export function apiError(code: string, message: string, status: number) {
   return {
     status,

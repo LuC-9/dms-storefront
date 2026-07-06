@@ -8,6 +8,7 @@ import { getSkuLabel, getSpecLabel } from "@/components/storefront/product-spec"
 import { ProductPurchasePanel } from "@/components/storefront/product-purchase-panel";
 import { requireCustomerSession } from "@/lib/rbac";
 import { Reveal } from "@/components/storefront/reveal";
+import { ProductCard } from "@/components/storefront/product-card";
 
 export default async function ProductDetailPage({
   params,
@@ -26,6 +27,18 @@ export default async function ProductDetailPage({
   if (!product) {
     notFound();
   }
+
+  const [variants, relatedProducts] = await Promise.all([
+    prisma.productVariant.findMany({
+      where: { productId: product.id },
+      orderBy: { sortOrder: "asc" },
+    }),
+    prisma.product.findMany({
+      where: { categoryId: product.categoryId, id: { not: product.id } },
+      take: 4,
+      include: { category: true },
+    }),
+  ]);
 
   const sku = getSkuLabel({ sku: product.sku, name: product.name, category: product.category.name });
   const spec = getSpecLabel({ sku: product.sku, name: product.name, category: product.category.name });
@@ -74,7 +87,10 @@ export default async function ProductDetailPage({
               imageUrl: product.imageUrl,
               priceInPaise: product.priceInPaise,
               inStock: product.inStock,
+              stockCount: product.stockCount,
+              lowStockAlert: product.lowStockAlert,
             }}
+            variants={variants}
             initialEmail={session?.user.email}
           />
           <p className="font-mono text-sm tracking-[0.03em] text-steel-500">Bulk enquiries: 512-2362054</p>
@@ -116,6 +132,23 @@ export default async function ProductDetailPage({
         <h2 className="font-display text-xl font-semibold uppercase tracking-[0.05em]">Description</h2>
         <p className="text-sm text-iron-800">{product.description}</p>
       </section>
+
+      {relatedProducts.length > 0 && (
+        <section className="space-y-4 border-t border-steel-500/20 pt-6">
+          <Reveal>
+            <h2 className="font-display text-xl font-semibold uppercase tracking-[0.05em]">
+              More from {product.category.name}
+            </h2>
+          </Reveal>
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {relatedProducts.map((related, index) => (
+              <Reveal key={related.id} delayMs={index * 60}>
+                <ProductCard product={related} />
+              </Reveal>
+            ))}
+          </div>
+        </section>
+      )}
     </div>
   );
 }

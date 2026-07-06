@@ -19,6 +19,14 @@ enum AdminRole {
   EMPLOYEE
 }
 
+enum QuoteStatus {
+  PENDING
+  QUOTED
+  ACCEPTED
+  REJECTED
+  EXPIRED
+}
+
 enum OrderStatus {
   PENDING
   CONFIRMED
@@ -60,21 +68,27 @@ model Category {
 }
 
 model Product {
-  id            String   @id @default(cuid())
-  name          String
-  slug          String   @unique
-  description   String
-  priceInPaise  Int
-  imageUrl      String
-  sku           String?
-  inStock       Boolean  @default(true)
-  categoryId    String
-  category      Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
-  cartItems     CartItem[]
-  orderItems    OrderItem[]
+  id              String   @id @default(cuid())
+  name            String
+  slug            String   @unique
+  description     String
+  priceInPaise    Int
+  imageUrl        String
+  sku             String?
+  hsn             String?
+  inStock         Boolean  @default(true)
+  stockCount      Int?
+  lowStockAlert   Int      @default(5)
+  categoryId      String
+  category        Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  cartItems       CartItem[]
+  orderItems      OrderItem[]
   stockNotifications StockNotification[]
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
+  variants        ProductVariant[]
+  quoteRequests   QuoteRequest[]
+  wishlistItems   WishlistItem[]
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
 
   @@index([categoryId])
   @@index([slug])
@@ -108,12 +122,16 @@ model User {
   email               String               @unique
   passwordHash        String
   phone               String?
+  gstin               String?
+  businessName        String?
   createdAt           DateTime             @default(now())
   updatedAt           DateTime             @updatedAt
   addresses           Address[]
   cart                Cart?
   orders              Order[]
   passwordResetTokens PasswordResetToken[]
+  quoteRequests       QuoteRequest[]
+  wishlists           Wishlist[]
 
   @@index([email])
 }
@@ -262,6 +280,73 @@ model Refund {
   @@index([orderId])
   @@index([paymentId])
   @@index([createdAt])
+}
+
+model ProductVariant {
+  id           String   @id @default(cuid())
+  productId    String
+  product      Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  name         String
+  sku          String?
+  priceInPaise Int?
+  stockCount   Int?
+  inStock      Boolean  @default(true)
+  sortOrder    Int      @default(0)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@index([productId])
+}
+
+model QuoteRequest {
+  id           String      @id @default(cuid())
+  userId       String?
+  user         User?       @relation(fields: [userId], references: [id], onDelete: SetNull)
+  guestName    String?
+  guestEmail   String?
+  guestPhone   String?
+  productId    String
+  product      Product     @relation(fields: [productId], references: [id], onDelete: Cascade)
+  quantity     Int
+  deliveryDate DateTime?
+  notes        String?
+  status       QuoteStatus @default(PENDING)
+  quotedPrice  Int?
+  adminNotes   String?
+  respondedAt  DateTime?
+  respondedBy  String?
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
+
+  @@index([userId])
+  @@index([productId])
+  @@index([status])
+  @@index([createdAt])
+}
+
+model Wishlist {
+  id        String         @id @default(cuid())
+  userId    String
+  user      User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  name      String         @default("My List")
+  items     WishlistItem[]
+  createdAt DateTime       @default(now())
+  updatedAt DateTime       @updatedAt
+
+  @@unique([userId, name])
+  @@index([userId])
+}
+
+model WishlistItem {
+  id         String   @id @default(cuid())
+  wishlistId String
+  wishlist   Wishlist @relation(fields: [wishlistId], references: [id], onDelete: Cascade)
+  productId  String
+  product    Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  createdAt  DateTime @default(now())
+
+  @@unique([wishlistId, productId])
+  @@index([wishlistId])
 }
 
 model Enquiry {
