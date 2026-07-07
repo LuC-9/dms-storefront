@@ -11,3 +11,5 @@ pnpm-debug.log*
 dev.db
 dev.db-journal
 .DS_Store
+skills-lock.json
+.agents/
