@@ -50,7 +50,7 @@ export function CatalogueFilters({ currentParams }: CatalogueFiltersProps) {
             placeholder="Min"
             value={minPrice}
             onChange={(e) => setMinPrice(e.target.value)}
-            className="w-24 border border-steel-500/40 bg-white px-2 py-1.5 font-mono text-xs tracking-[0.03em] text-iron-800 focus:border-iron-800 focus:outline-none"
+            className="w-24 rounded-xl border-0 bg-surface-muted px-3 py-2 text-sm ring-1 ring-steel-200 focus:ring-2 focus:ring-safety-orange/30"
           />
           <span className="font-mono text-xs text-steel-500">—</span>
           <input
@@ -59,13 +59,13 @@ export function CatalogueFilters({ currentParams }: CatalogueFiltersProps) {
             placeholder="Max"
             value={maxPrice}
             onChange={(e) => setMaxPrice(e.target.value)}
-            className="w-24 border border-steel-500/40 bg-white px-2 py-1.5 font-mono text-xs tracking-[0.03em] text-iron-800 focus:border-iron-800 focus:outline-none"
+            className="w-24 rounded-xl border-0 bg-surface-muted px-3 py-2 text-sm ring-1 ring-steel-200 focus:ring-2 focus:ring-safety-orange/30"
           />
         </div>
         <button
           type="button"
           onClick={applyPriceFilter}
-          className="border border-iron-800 bg-iron-800 px-3 py-1.5 font-mono text-xs uppercase tracking-[0.05em] text-alloy-white hover:bg-forge-950 transition-colors"
+          className="rounded-full bg-iron-800 px-4 py-2 text-sm font-semibold text-white hover:bg-forge-950 transition-colors"
         >
           Apply
         </button>

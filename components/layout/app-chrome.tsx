@@ -10,16 +10,7 @@ import { CartDrawer } from "@/components/storefront/cart-drawer";
 import { Toaster } from "@/components/ui/toast";
 import { CompareBar } from "@/components/storefront/compare-toggle";
 
-const pageVariants = {
-  initial: { opacity: 0, y: 8 },
-  enter: { opacity: 1, y: 0 },
-  exit: { opacity: 0, y: -4 },
-};
-
-const pageTransition = {
-  duration: 0.28,
-  ease: [0.22, 1, 0.36, 1] as [number, number, number, number],
-};
+import { pageVariants, TRANSITION_PAGE } from "@/lib/motion-presets";
 
 export function AppChrome({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
@@ -46,7 +37,7 @@ export function AppChrome({ children }: { children: React.ReactNode }) {
             initial="initial"
             animate="enter"
             exit="exit"
-            transition={pageTransition}
+            transition={TRANSITION_PAGE}
           >
             {children}
           </motion.main>

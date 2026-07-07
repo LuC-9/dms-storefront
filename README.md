@@ -286,7 +286,7 @@ The seeded catalogue includes **25 categories** and **34 products** spanning val
 ## Store information
 
 - **Business**: Delta Mill Stores (also known as Delta Machinery Store)
-- **Contact**: Ms. Shalini Awasthi
+- **Contact**: Mr. Vineet Awasthi
 - **Phone**: [512-2362054](tel:5122362054)
 - **Address**: 78/45 Latouche Road, Anwar Ganj, Mulganj, Kanpur, Uttar Pradesh - 208001, India
 

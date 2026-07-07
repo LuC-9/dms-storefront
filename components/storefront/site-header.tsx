@@ -4,16 +4,13 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { signOut, useSession } from "next-auth/react";
-import { Menu, ShoppingBag, X } from "lucide-react";
+import { Menu, ShoppingBag, Zap } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import {
-  Sheet,
-  SheetContent,
-  SheetTrigger,
-} from "@/components/ui/sheet";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { useCart } from "@/components/storefront/cart-context";
 import { SearchDialog } from "@/components/storefront/search-dialog";
+import { SPRING_SNAP } from "@/lib/motion-presets";
 
 const links = [
   { href: "/", label: "Home" },
@@ -42,7 +39,7 @@ export function SiteHeader() {
   }, []);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 12);
+    const onScroll = () => setScrolled(window.scrollY > 8);
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
@@ -54,39 +51,38 @@ export function SiteHeader() {
   const authWidget =
     status === "loading" ? null : isCustomer ? (
       <div className="relative">
-        <Button
-          variant="ghost"
-          className="h-9 rounded-none border border-steel-500/40 px-3 text-xs font-medium uppercase tracking-[0.05em] text-alloy-white hover:bg-forge-950"
+        <button
+          type="button"
+          className="rounded-full bg-white/10 px-3 py-1.5 text-sm font-medium text-white ring-1 ring-white/15 hover:bg-white/20"
           onClick={() => setMenuOpen((prev) => !prev)}
         >
-          {session.user.name ?? session.user.email ?? "My account"}
-        </Button>
+          {session.user.name ?? "Account"}
+        </button>
         <AnimatePresence>
           {menuOpen && (
             <motion.div
               initial={{ opacity: 0, y: 6, scale: 0.97 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: 4, scale: 0.97 }}
-              transition={{ duration: 0.18, ease: "easeOut" as const }}
-              className="absolute right-0 top-full z-40 mt-2 min-w-44 border border-steel-500 bg-alloy-white p-1"
+              transition={{ duration: 0.18 }}
+              className="absolute right-0 top-full z-40 mt-2 min-w-44 overflow-hidden rounded-2xl bg-white p-1 shadow-card-hover ring-1 ring-steel-200"
             >
+              {[
+                { label: "My orders", href: "/account/orders" },
+                { label: "Profile", href: "/account" },
+              ].map((item) => (
+                <button
+                  key={item.href}
+                  type="button"
+                  className="block w-full rounded-xl px-3 py-2 text-left text-sm hover:bg-surface-muted"
+                  onClick={() => { setMenuOpen(false); router.push(item.href); }}
+                >
+                  {item.label}
+                </button>
+              ))}
               <button
                 type="button"
-                className="block w-full px-3 py-2 text-left text-sm hover:bg-blueprint-100"
-                onClick={() => { setMenuOpen(false); router.push("/account/orders"); }}
-              >
-                My orders
-              </button>
-              <button
-                type="button"
-                className="block w-full px-3 py-2 text-left text-sm hover:bg-blueprint-100"
-                onClick={() => { setMenuOpen(false); router.push("/account"); }}
-              >
-                Profile
-              </button>
-              <button
-                type="button"
-                className="block w-full px-3 py-2 text-left text-sm text-safety-orange hover:bg-blueprint-100"
+                className="block w-full rounded-xl px-3 py-2 text-left text-sm text-safety-orange hover:bg-surface-muted"
                 onClick={() => { setMenuOpen(false); void signOut({ callbackUrl: "/" }); }}
               >
                 Sign out
@@ -97,110 +93,126 @@ export function SiteHeader() {
       </div>
     ) : status === "unauthenticated" ? (
       <div className="hidden items-center gap-2 md:flex">
-        <Button
-          asChild
-          variant="ghost"
-          size="sm"
-          className="rounded-none text-alloy-white hover:bg-forge-950"
-        >
-          <Link href="/login">Sign in</Link>
-        </Button>
-        <Button
-          asChild
-          size="sm"
-          className="rounded-none border border-safety-orange bg-safety-orange font-display uppercase tracking-[0.05em] text-alloy-white hover:bg-safety-orange/90"
-        >
-          <Link href="/register">Create account</Link>
-        </Button>
+        <Link href="/login" className="rounded-full px-3 py-1.5 text-sm font-medium text-white hover:bg-white/10">
+          Sign in
+        </Link>
+        <Link href="/register" className="rounded-full bg-safety-orange px-4 py-1.5 text-sm font-semibold text-white hover:bg-accent-600">
+          Create account
+        </Link>
       </div>
     ) : null;
 
   return (
     <motion.header
-      className="sticky top-0 z-40 border-b bg-iron-800 transition-[border-color,box-shadow] duration-300"
-      style={{
-        borderBottomColor: scrolled ? "rgba(69,99,122,0.5)" : "rgba(69,99,122,0.3)",
-        boxShadow: scrolled ? "0 4px 24px -4px rgba(13,27,42,0.45)" : "none",
-      }}
-      initial={{ y: -60, opacity: 0 }}
+      className="sticky top-0 z-40 bg-iron-800 shadow-header"
+      initial={{ y: -20, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] as [number, number, number, number]  }}
+      transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
     >
-      <div className="container flex h-14 items-center justify-between">
-        <Link
-          href="/"
-          className="font-display text-lg font-bold uppercase tracking-[0.06em] text-alloy-white transition-colors hover:text-safety-orange"
-        >
-          Delta Mill
+      <div className="border-b border-steel-500/20 bg-forge-950">
+        <div className="container flex items-center justify-between py-1 font-mono text-[0.6rem] uppercase tracking-[0.18em] text-steel-400">
+          <span>Kanpur, India · Est. 1987</span>
+          <span className="hidden md:inline">B2B wholesale · Grade-certified stock</span>
+          <span>Tel 512-2362054</span>
+        </div>
+      </div>
+      <div className="container flex h-16 items-center gap-4 md:gap-6">
+        <Link href="/" className="flex shrink-0 items-center gap-2.5">
+          <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-safety-orange font-display text-sm font-bold text-white">
+            D
+          </span>
+          <div className="hidden sm:block leading-tight">
+            <span className="block font-display text-base font-bold uppercase tracking-wide text-white">
+              Delta Mill
+            </span>
+            <span className="block font-mono text-[0.55rem] uppercase tracking-[0.2em] text-steel-400">
+              Stores
+            </span>
+          </div>
         </Link>
-        <nav className="hidden items-center gap-5 text-sm md:flex">
+
+        {/* Center search — desktop */}
+        <div className="hidden flex-1 md:flex md:justify-center">
+          <SearchDialog variant="header" />
+        </div>
+
+        {/* Promo strip */}
+        <p className="hidden items-center gap-1.5 text-xs font-medium text-white/80 lg:flex">
+          <Zap className="h-3.5 w-3.5 text-safety-orange" />
+          Orders before noon ship same day
+        </p>
+
+        <nav className="hidden items-center gap-1 xl:flex">
           {links.map((link) => (
             <Link
               key={link.href}
               href={link.href}
-              className="relative font-medium text-alloy-white hover:text-blueprint-100"
+              className={`relative rounded-full px-3 py-1.5 text-sm font-medium transition-colors ${
+                pathname === link.href ? "text-white" : "text-white/70 hover:text-white"
+              }`}
             >
               {link.label}
               {pathname === link.href && (
                 <motion.span
-                  layoutId="nav-underline"
-                  className="absolute -bottom-0.5 left-0 right-0 h-0.5 bg-safety-orange"
-                  transition={{ type: "spring", stiffness: 400, damping: 35 }}
+                  layoutId="nav-pill"
+                  className="absolute inset-0 -z-10 rounded-full bg-white/15"
+                  transition={SPRING_SNAP}
                 />
               )}
             </Link>
           ))}
         </nav>
-        <div className="flex items-center gap-2">
+
+        <div className="ml-auto flex items-center gap-2">
+          <div className="md:hidden">
+            <SearchDialog variant="icon" />
+          </div>
           {authWidget}
-          <SearchDialog />
-          <Button
-            variant="ghost"
-            size="sm"
-            className={`relative rounded-none border border-steel-500/40 text-alloy-white hover:bg-forge-950 ${cartAnimated ? "animate-cart-bounce" : ""}`}
+          <button
+            type="button"
             onClick={toggleDrawer}
             aria-label="Open cart"
+            className={`relative flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-white ring-1 ring-white/15 hover:bg-white/20 ${cartAnimated ? "animate-cart-bounce" : ""}`}
           >
             <ShoppingBag className="h-4 w-4" />
             <AnimatePresence>
               {itemCount > 0 && (
                 <motion.span
-                  key="badge"
+                  key={itemCount}
                   initial={{ scale: 0 }}
                   animate={{ scale: 1 }}
                   exit={{ scale: 0 }}
-                  transition={{ type: "spring", stiffness: 400, damping: 20 }}
-                  className="absolute -right-2 -top-2 flex h-5 min-w-5 items-center justify-center rounded-full bg-safety-orange px-1 text-[10px] text-alloy-white"
+                  transition={SPRING_SNAP}
+                  className="absolute -right-1 -top-1 flex h-5 min-w-5 items-center justify-center rounded-full bg-safety-orange px-1 text-[10px] font-bold text-white"
                 >
                   {itemCount}
                 </motion.span>
               )}
             </AnimatePresence>
-          </Button>
+          </button>
           <Sheet>
             <SheetTrigger asChild>
-              <Button
-                variant="ghost"
-                className="rounded-none border border-steel-500/40 text-alloy-white hover:bg-forge-950 md:hidden"
+              <button
+                type="button"
+                className="flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-white ring-1 ring-white/15 hover:bg-white/20 xl:hidden"
                 aria-label="Toggle menu"
               >
                 <Menu className="h-5 w-5" />
-              </Button>
+              </button>
             </SheetTrigger>
-            <SheetContent side="left" className="w-[280px] border-steel-500 bg-forge-950 text-alloy-white">
-              <div className="mt-8 flex flex-col gap-3">
+            <SheetContent side="left" className="w-[280px] rounded-r-3xl border-0 bg-iron-800 text-white">
+              <div className="mt-8 flex flex-col gap-2">
                 {links.map((link) => (
                   <Link
                     key={link.href}
                     href={link.href}
-                    className={`text-sm font-medium ${pathname === link.href ? "text-safety-orange" : "text-alloy-white"}`}
+                    className={`rounded-xl px-3 py-2.5 text-sm font-medium ${
+                      pathname === link.href ? "bg-white/15 text-white" : "text-white/80 hover:bg-white/10"
+                    }`}
                   >
                     {link.label}
                   </Link>
                 ))}
-                <Link href="/cart" className="text-sm font-medium text-alloy-white">
-                  Cart
-                </Link>
               </div>
             </SheetContent>
           </Sheet>

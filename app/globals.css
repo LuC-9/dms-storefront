@@ -7,106 +7,132 @@
 }
 
 body {
-  @apply bg-blueprint-100 font-sans text-iron-800 antialiased;
+  @apply bg-surface-cream font-sans text-iron-800 antialiased;
+  background-image:
+    radial-gradient(circle at 10% 0%, rgba(69, 99, 122, 0.1), transparent 28rem),
+    radial-gradient(circle at 90% 10%, rgba(204, 85, 0, 0.08), transparent 24rem);
 }
 
-/* --- Legacy CSS animations (kept for cart-bounce and badge-pop) --- */
-
 @keyframes badge-pop {
-  from {
-    transform: scale(0);
-  }
-  to {
-    transform: scale(1);
-  }
+  from { transform: scale(0); }
+  to { transform: scale(1); }
 }
 
 @keyframes reveal-up {
-  from {
-    opacity: 0;
-    transform: translateY(16px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes page-fade {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 @keyframes cart-bounce {
-  0%,
-  100% {
-    transform: translateY(0) scale(1);
-  }
-  30% {
-    transform: translateY(-3px) scale(1.08);
-  }
-  60% {
-    transform: translateY(0) scale(0.96);
-  }
+  0%, 100% { transform: translateY(0) scale(1); }
+  30% { transform: translateY(-3px) scale(1.08); }
+  60% { transform: translateY(0) scale(0.96); }
 }
 
-/* Kept for legacy/non-Framer usages */
-.reveal-init {
-  opacity: 0;
-  transform: translateY(16px);
+@keyframes shimmer-slide {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(100%); }
 }
 
-.reveal-in {
-  animation: reveal-up 420ms ease-out forwards;
+.reveal-init { opacity: 0; transform: translateY(16px); }
+.reveal-in { animation: reveal-up 420ms ease-out forwards; }
+.animate-page-enter { animation: page-fade 220ms ease-out; }
+.animate-cart-bounce { animation: cart-bounce 420ms ease-out; }
+.animate-shimmer { animation: shimmer-slide 2.5s ease-in-out infinite; }
+
+button:active, a[role="button"]:active { opacity: 0.9; }
+input, textarea, select { @apply outline-none; }
+input:focus-visible, textarea:focus-visible {
+  @apply ring-2 ring-safety-orange/40 ring-offset-0;
 }
-
-.animate-page-enter {
-  animation: page-fade 220ms ease-out;
-}
-
-.animate-cart-bounce {
-  animation: cart-bounce 420ms ease-out;
-}
-
-/* --- Focus & interaction --- */
-
-button:active,
-a[role="button"]:active {
-  opacity: 0.85;
-}
-
-input,
-textarea,
-select {
-  @apply outline-none;
-}
-
-input:focus-visible,
-textarea:focus-visible {
-  @apply ring-1 ring-safety-orange ring-offset-0;
-}
-
-/* --- Reduced motion override --- */
 
 @media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
+  *, *::before, *::after {
     transition-duration: 0.01ms !important;
     animation-duration: 0.01ms !important;
   }
+  .reveal-init { opacity: 1; transform: none; }
+  .animate-shimmer { animation: none !important; }
+}
 
-  .reveal-init {
-    opacity: 1;
-    transform: none;
+@layer components {
+  .industrial-eyebrow {
+    @apply font-mono text-[0.65rem] font-medium uppercase tracking-[0.2em] text-safety-orange;
+  }
+
+  .card-surface {
+    @apply relative overflow-hidden rounded-2xl bg-alloy-white shadow-card ring-1 ring-steel-300/70 transition-all duration-300 hover:shadow-card-hover hover:ring-steel-400/70;
+  }
+
+  .industrial-surface {
+    @apply relative overflow-hidden rounded-2xl bg-alloy-white shadow-card ring-1 ring-steel-400/60;
+  }
+
+  .industrial-surface::before {
+    content: "";
+    @apply absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-safety-orange via-steel-500 to-iron-800;
+  }
+
+  .pill-chip {
+    @apply inline-flex items-center rounded-full px-4 py-2 text-sm font-medium transition-all duration-200;
+  }
+
+  .pill-chip-active {
+    @apply bg-iron-800 text-white shadow-sm;
+  }
+
+  .pill-chip-inactive {
+    @apply bg-alloy-white text-iron-800 ring-1 ring-steel-300 hover:bg-surface-muted;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center rounded-full bg-safety-orange px-6 py-2.5 font-sans text-sm font-semibold text-white shadow-sm transition-all duration-200 hover:bg-accent-600 hover:shadow-md active:scale-[0.98];
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center rounded-full border border-steel-400/70 bg-alloy-white px-6 py-2.5 font-sans text-sm font-semibold text-iron-800 shadow-sm transition-all duration-200 hover:bg-surface-muted active:scale-[0.98];
+  }
+
+  .section-heading {
+    @apply font-display text-2xl font-bold tracking-tight text-iron-800 md:text-3xl lg:text-4xl;
+  }
+
+  .spec-tag {
+    @apply inline-block rounded-full bg-steel-100 px-2.5 py-0.5 font-sans text-[0.65rem] font-medium text-steel-600;
+  }
+
+  .spec-plate {
+    @apply inline-flex items-center rounded-full border border-steel-200 bg-steel-50 px-2.5 py-1 font-mono text-[0.62rem] font-medium uppercase tracking-[0.12em] text-steel-600;
+  }
+
+  .stock-badge {
+    @apply rounded-full px-2.5 py-0.5 font-sans text-[0.65rem] font-semibold tracking-normal;
+  }
+
+  .hero-curve {
+    border-radius: 0 0 1.5rem 1.5rem;
+  }
+
+  @media (min-width: 768px) {
+    .hero-curve {
+      border-radius: 0 0 2.5rem 2.5rem;
+    }
   }
 }
 
-/* --- Utility: safety-orange/8 background via opacity --- */
-.bg-safety-orange\/8 {
-  background-color: rgb(204 85 0 / 0.08);
+.bg-blueprint-grid {
+  /* removed blueprint grid */
+}
+
+.bg-blueprint-grid-light {
+  /* removed blueprint grid */
+}
+
+.corner-brackets {
+  @apply hidden;
 }

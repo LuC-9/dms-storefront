@@ -1,7 +1,9 @@
 "use client";
 
+import Link from "next/link";
 import { motion } from "framer-motion";
-import { Wrench, Package, Users, MapPin } from "lucide-react";
+import { ArrowRight, MapPin, Package, ShieldCheck, Truck, Users, Wrench } from "lucide-react";
+import { Reveal, Stagger, StaggerItem } from "@/components/storefront/reveal";
 
 const milestones = [
   { year: "1987", event: "Delta Mill Stores founded on Latouche Road, Kanpur." },
@@ -18,63 +20,65 @@ const categories = [
   { Icon: MapPin, name: "Steel & Flanges", desc: "ERW pipes, SS flanges, structural steel in standard sizes." },
 ];
 
-const EASE: [number, number, number, number] = [0.22, 1, 0.36, 1];
-
-const containerVariants = {
-  hidden: {},
-  show: { transition: { staggerChildren: 0.1 } },
-};
-
-const itemVariants = {
-  hidden: { opacity: 0, y: 20 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.55, ease: EASE } },
-};
-
 export default function AboutPage() {
   return (
-    <div>
-      {/* Hero banner */}
-      <section className="bg-forge-950 py-14 md:py-20">
+    <div className="space-y-0">
+      <section className="py-8 md:py-12">
         <div className="container">
-          <motion.div
-            initial={{ opacity: 0, y: 28 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.65, ease: EASE }}
-            className="max-w-2xl space-y-5"
-          >
-            <p className="font-mono text-[0.65rem] uppercase tracking-[0.22em] text-safety-orange">
-              Est. 1987 · Kanpur, India
-            </p>
-            <h1 className="font-display text-4xl font-bold uppercase leading-none tracking-[0.03em] text-alloy-white md:text-6xl">
-              About Delta<br />Mill Stores
-            </h1>
-            <div className="h-px w-16 bg-safety-orange" />
-            <p className="text-sm leading-relaxed text-blueprint-100/80">
-              Three decades of supplying Kanpur's manufacturing and engineering sector
-              with precision-grade industrial hardware, machinery components, and specialist
-              instruments.
-            </p>
-          </motion.div>
+          <div className="relative overflow-hidden rounded-[2rem] bg-iron-800 px-6 py-12 shadow-card-hover md:px-10 md:py-16">
+            <div className="absolute -right-16 -top-16 h-48 w-48 rounded-full bg-safety-orange/20 blur-3xl" />
+            <div className="relative grid gap-8 lg:grid-cols-[1.2fr_0.8fr] lg:items-end">
+              <motion.div
+                initial={{ opacity: 0, y: 24 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+                className="max-w-2xl space-y-5"
+              >
+                <p className="industrial-eyebrow">Est. 1987 · Kanpur, India</p>
+                <h1 className="font-display text-4xl font-bold tracking-tight text-white md:text-6xl">
+                  Built around dependable industrial supply.
+                </h1>
+                <p className="max-w-xl text-base leading-relaxed text-steel-200">
+                  Delta Mill Stores helps workshops, maintenance teams, and manufacturers source valves,
+                  fittings, bearings, pumps, and hardware with practical guidance and fast availability.
+                </p>
+                <div className="flex flex-wrap gap-3">
+                  <Link href="/catalogue" className="btn-primary gap-2">
+                    Browse catalogue <ArrowRight className="h-4 w-4" />
+                  </Link>
+                  <Link href="/contact" className="btn-secondary border-white/20 bg-white/10 text-white hover:bg-white/20">
+                    Ask for a quote
+                  </Link>
+                </div>
+              </motion.div>
+
+              <Reveal direction="scale" className="grid gap-3 sm:grid-cols-3 lg:grid-cols-1">
+                {[
+                  { Icon: ShieldCheck, label: "Trusted supplier", value: "Since 1987" },
+                  { Icon: Truck, label: "Dispatch hub", value: "Kanpur" },
+                  { Icon: Package, label: "Catalogue focus", value: "Valves + hardware" },
+                ].map(({ Icon, label, value }) => (
+                  <div key={label} className="rounded-2xl bg-white/10 p-4 ring-1 ring-white/15 backdrop-blur">
+                    <Icon className="h-5 w-5 text-safety-orange" strokeWidth={1.7} />
+                    <p className="mt-3 text-sm font-semibold text-white">{value}</p>
+                    <p className="text-xs text-steel-300">{label}</p>
+                  </div>
+                ))}
+              </Reveal>
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* Story section */}
       <section className="py-14 md:py-20">
         <div className="container">
           <div className="grid gap-10 md:grid-cols-2 md:gap-16">
-            <motion.div
-              initial={{ opacity: 0, x: -24 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, ease: EASE }}
-              viewport={{ once: true }}
-              className="space-y-5"
-            >
-              <h2 className="font-display text-2xl font-bold uppercase tracking-[0.04em]">
-                Our story
-              </h2>
+            <Reveal direction="left" className="card-surface p-6 md:p-8">
+              <p className="industrial-eyebrow">Our story</p>
+              <h2 className="section-heading mt-2">A practical partner for procurement teams</h2>
               <div className="space-y-4 text-sm leading-relaxed text-steel-500">
                 <p>
-                  Delta Mill Stores — also known as Delta Machinery Store — is a trusted supplier
+                  Delta Mill Stores, also known as Delta Machinery Store, is a trusted supplier
                   and retailer of industrial hardware, machinery components, and precision
                   instruments. Located on Latouche Road in Anwar Ganj, Kanpur, we have been
                   serving industrial buyers, engineers, and workshops across Uttar Pradesh and
@@ -87,89 +91,61 @@ export default function AboutPage() {
                   quality and fast availability.
                 </p>
                 <p>
-                  Led by Ms. Shalini Awasthi, our team brings decades of hands-on experience in
+                  Led by Mr. Vineet Awasthi, our team brings decades of hands-on experience in
                   industrial procurement, helping clients source the right component the first time —
                   at competitive wholesale prices.
                 </p>
               </div>
-            </motion.div>
+            </Reveal>
 
-            {/* Timeline */}
-            <motion.div
-              initial={{ opacity: 0, x: 24 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, ease: EASE }}
-              viewport={{ once: true }}
-              className="space-y-5"
-            >
-              <h2 className="font-display text-2xl font-bold uppercase tracking-[0.04em]">
-                Timeline
-              </h2>
-              <ol className="relative space-y-0 border-l border-steel-500/30 pl-6">
+            <Reveal direction="right" className="card-surface p-6 md:p-8">
+              <p className="industrial-eyebrow">Milestones</p>
+              <h2 className="section-heading mt-2">Growing with Kanpur industry</h2>
+              <ol className="mt-6 space-y-4">
                 {milestones.map((m, i) => (
                   <motion.li
                     key={m.year}
-                    initial={{ opacity: 0, x: -12 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.45, delay: i * 0.08, ease: "easeOut" }}
+                    initial={{ opacity: 0, y: 10 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.35, delay: i * 0.06, ease: "easeOut" }}
                     viewport={{ once: true }}
-                    className="relative pb-6 last:pb-0"
+                    className="flex gap-4 rounded-2xl bg-surface-muted p-4"
                   >
-                    <span className="absolute -left-[1.625rem] top-0 flex h-4 w-4 items-center justify-center border border-safety-orange/40 bg-blueprint-100">
-                      <span className="h-1.5 w-1.5 bg-safety-orange" />
-                    </span>
-                    <p className="font-mono text-xs uppercase tracking-[0.1em] text-safety-orange">
-                      {m.year}
-                    </p>
-                    <p className="mt-0.5 text-sm text-steel-500">{m.event}</p>
+                    <p className="shrink-0 font-display text-xl font-bold text-safety-orange">{m.year}</p>
+                    <p className="text-sm leading-relaxed text-steel-600">{m.event}</p>
                   </motion.li>
                 ))}
               </ol>
-            </motion.div>
+            </Reveal>
           </div>
         </div>
       </section>
 
-      {/* Categories we cover */}
-      <section className="bg-alloy-white py-14 md:py-20">
+      <section className="bg-surface-muted/50 py-14 md:py-20">
         <div className="container space-y-10">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.55, ease: EASE }}
-            viewport={{ once: true }}
-            className="space-y-1"
-          >
-            <p className="font-mono text-[0.65rem] uppercase tracking-[0.2em] text-safety-orange">
-              What we supply
-            </p>
-            <h2 className="font-display text-2xl font-bold uppercase tracking-[0.04em]">
-              Our core catalogue areas
-            </h2>
-          </motion.div>
-          <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, margin: "-60px" }}
-            className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4"
-          >
+          <Reveal>
+            <div className="max-w-2xl">
+              <p className="industrial-eyebrow">What we supply</p>
+              <h2 className="section-heading mt-2">Core catalogue areas</h2>
+              <p className="mt-3 text-sm leading-relaxed text-steel-500">
+                The range is broad, but the aim stays simple: dependable components, clear availability,
+                and quick support for repeat industrial buying.
+              </p>
+            </div>
+          </Reveal>
+          <Stagger className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {categories.map(({ Icon, name, desc }) => (
-              <motion.div
-                key={name}
-                variants={itemVariants}
-                className="space-y-3 border border-steel-500/25 bg-white p-6"
-              >
-                <div className="flex h-9 w-9 items-center justify-center border border-safety-orange/25 bg-safety-orange/8">
-                  <Icon className="h-4 w-4 text-safety-orange" strokeWidth={1.5} />
+              <StaggerItem key={name} direction="scale">
+                <div className="card-surface h-full p-6">
+                  <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-safety-orange/10">
+                    <Icon className="h-5 w-5 text-safety-orange" strokeWidth={1.7} />
+                  </div>
+                  <h3 className="mt-5 font-display text-lg font-semibold text-iron-800">{name}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-steel-500">{desc}</p>
                 </div>
-                <h3 className="font-display text-base font-semibold uppercase tracking-[0.04em]">
-                  {name}
-                </h3>
-                <p className="text-sm leading-relaxed text-steel-500">{desc}</p>
-              </motion.div>
+              </StaggerItem>
             ))}
-          </motion.div>
+          </Stagger>
         </div>
       </section>
     </div>

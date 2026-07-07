@@ -1,17 +1,17 @@
 import type { Metadata } from "next";
-import { IBM_Plex_Mono, IBM_Plex_Sans, Oswald } from "next/font/google";
+import { IBM_Plex_Mono, Oswald, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import { AppChrome } from "@/components/layout/app-chrome";
 
 const displayFont = Oswald({
   subsets: ["latin"],
-  weight: ["400", "600", "700"],
+  weight: ["500", "600", "700"],
   variable: "--font-display",
 });
 
-const bodyFont = IBM_Plex_Sans({
+const bodyFont = Plus_Jakarta_Sans({
   subsets: ["latin"],
-  weight: ["400", "500"],
+  weight: ["400", "500", "600"],
   variable: "--font-body",
 });
 
@@ -36,7 +36,7 @@ export default function RootLayout({
       lang="en"
       className={`${displayFont.variable} ${bodyFont.variable} ${monoFont.variable}`}
     >
-      <body className="font-sans">
+      <body className="font-sans antialiased">
         <AppChrome>{children}</AppChrome>
       </body>
     </html>

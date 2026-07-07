@@ -1,187 +1,122 @@
 "use client";
 
-import { useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { motion, useScroll, useTransform } from "framer-motion";
-import { ArrowRight, Phone } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { motion } from "framer-motion";
+import { ArrowRight, Gauge, Phone, Wrench } from "lucide-react";
+import { EASE_OUT, fadeUp, staggerContainer } from "@/lib/motion-presets";
 
-const EASE: [number, number, number, number] = [0.22, 1, 0.36, 1];
-
-const container = {
-  hidden: {},
-  show: {
-    transition: {
-      staggerChildren: 0.09,
-      delayChildren: 0.15,
-    },
-  },
-};
-
-const item = {
-  hidden: { opacity: 0, y: 28 },
-  show: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.65, ease: EASE },
-  },
-};
-
-const heroStats = [
-  { value: "34+", label: "Products" },
-  { value: "25", label: "Categories" },
-  { value: "B2B", label: "Wholesale" },
-  { value: "1987", label: "Established" },
+const stats = [
+  { value: "34+", label: "Valve & hardware SKUs" },
+  { value: "25", label: "Industrial categories" },
+  { value: "B2B", label: "Procurement pricing" },
+  { value: "1987", label: "Supplying Kanpur" },
 ];
 
 export function Hero() {
-  const sectionRef = useRef<HTMLElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start start", "end start"],
-  });
-  const imageY = useTransform(scrollYProgress, [0, 1], ["0%", "18%"]);
-  const imageScale = useTransform(scrollYProgress, [0, 1], [1, 1.05]);
-
   return (
-    <section ref={sectionRef} className="relative overflow-hidden bg-forge-950">
-      {/* Blueprint grid */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 opacity-[0.07]"
-        style={{
-          backgroundImage: `
-            linear-gradient(rgba(220,232,242,1) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(220,232,242,1) 1px, transparent 1px)
-          `,
-          backgroundSize: "48px 48px",
-        }}
-      />
+    <section className="relative pb-8 md:pb-12">
+      <div className="container pt-4 md:pt-6">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, ease: EASE_OUT }}
+          className="relative overflow-hidden rounded-3xl bg-[radial-gradient(circle_at_80%_0%,rgba(204,85,0,0.22),transparent_32%),linear-gradient(135deg,#0D1B2A,#1A3148_52%,#0D1B2A)] px-6 py-10 shadow-xl ring-1 ring-steel-500/20 md:px-12 md:py-14 lg:py-16"
+        >
+          <div className="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full bg-safety-orange/15 blur-3xl" />
+          <div className="pointer-events-none absolute -left-20 -bottom-20 h-64 w-64 rounded-full bg-primary-500/10 blur-3xl" />
+          <div className="pointer-events-none absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-safety-orange/70 to-transparent" />
 
-      <div className="container relative z-10 py-14 md:py-20">
-        <div className="grid gap-10 md:grid-cols-2 md:items-center">
-          {/* Left: Text */}
-          <motion.div
-            variants={container}
-            initial="hidden"
-            animate="show"
-            className="flex flex-col gap-5"
-          >
-            <motion.p
-              variants={item}
-              className="font-mono text-[0.65rem] uppercase tracking-[0.22em] text-safety-orange"
-            >
-              Est. 1987 · Kanpur, India
-            </motion.p>
-
-            <motion.h1
-              variants={item}
-              className="font-display text-5xl font-bold uppercase leading-none tracking-[0.02em] text-alloy-white md:text-7xl"
-            >
-              Delta<br />Mill<br />
-              <span className="text-safety-orange">Stores</span>
-            </motion.h1>
-
+          <div className="relative z-10 grid items-center gap-8 md:grid-cols-2 md:gap-10">
             <motion.div
-              variants={item}
-              className="h-px w-16 bg-safety-orange"
-            />
-
-            <motion.p
-              variants={item}
-              className="max-w-sm text-sm leading-relaxed text-blueprint-100"
+              variants={staggerContainer(0.1, 0.15)}
+              initial="hidden"
+              animate="show"
+              className="space-y-5"
             >
-              Precision-grade industrial hardware and machinery for workshops,
-              manufacturing plants, and procurement teams across India.
-            </motion.p>
-
-            <motion.div
-              variants={item}
-              className="flex flex-wrap items-center gap-3"
-            >
-              <Button
-                asChild
-                className="rounded-none border border-safety-orange bg-safety-orange font-display uppercase tracking-[0.05em] text-alloy-white hover:bg-safety-orange/90"
+              <motion.p variants={fadeUp} className="industrial-eyebrow flex items-center gap-2">
+                <Wrench className="h-3 w-3" />
+                Valves · Fittings · Industrial Hardware · Kanpur
+              </motion.p>
+              <motion.h1
+                variants={fadeUp}
+                className="font-display text-4xl font-bold leading-[1.1] tracking-tight text-white md:text-5xl lg:text-6xl"
               >
-                <Link href="/catalogue" className="flex items-center gap-2">
+                Valve-ready supply for workshops &amp; plants
+              </motion.h1>
+              <motion.p variants={fadeUp} className="max-w-md text-sm leading-relaxed text-blueprint-100/80 md:text-base">
+                Grade-certified valves, bearings, pumps, flanges, and industrial components —
+                wholesale dispatch from Kanpur since 1987.
+              </motion.p>
+              <motion.div variants={fadeUp} className="flex flex-wrap gap-3 pt-1">
+                <Link href="/catalogue" className="btn-primary gap-2">
                   Browse catalogue <ArrowRight className="h-4 w-4" />
                 </Link>
-              </Button>
-              <Button
-                asChild
-                variant="ghost"
-                className="rounded-none border border-steel-500/40 font-display uppercase tracking-[0.05em] text-alloy-white hover:bg-iron-800"
-              >
-                <Link href="/contact">Get a quote</Link>
-              </Button>
+                <Link href="/contact" className="btn-secondary border-steel-500/40 bg-white/5 text-white hover:bg-white/10">
+                  Request quote
+                </Link>
+              </motion.div>
+              <motion.div variants={fadeUp} className="flex items-center gap-2 font-sans text-xs tracking-wide text-steel-300">
+                <Phone className="h-3.5 w-3.5 text-safety-orange" />
+                <span>512-2362054 · Same-day dispatch before noon</span>
+              </motion.div>
+              <motion.div variants={fadeUp} className="flex flex-wrap gap-2 pt-1">
+                {["Ball valves", "Pressure gauges", "Flanges", "Pump spares"].map((item) => (
+                  <span key={item} className="rounded-full border border-white/10 bg-white/[0.06] px-3 py-1 text-xs text-steel-200">
+                    {item}
+                  </span>
+                ))}
+              </motion.div>
             </motion.div>
 
             <motion.div
-              variants={item}
-              className="flex items-center gap-2 font-mono text-xs tracking-[0.05em] text-steel-400"
+              initial={{ opacity: 0, scale: 0.92, x: 20 }}
+              animate={{ opacity: 1, scale: 1, x: 0 }}
+              transition={{ duration: 0.7, ease: EASE_OUT, delay: 0.2 }}
+              className="relative mx-auto w-full max-w-md md:max-w-none"
             >
-              <Phone className="h-3 w-3 text-safety-orange" />
-              <span>512-2362054</span>
+              <div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-iron-800 ring-1 ring-white/10 shadow-lg">
+                <motion.div
+                  className="absolute inset-0"
+                  animate={{ scale: [1, 1.03, 1] }}
+                  transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+                >
+                  <Image
+                    src="https://images.unsplash.com/photo-1504148455328-c376907d081c?w=1200&h=800&fit=crop"
+                    alt="Industrial valves and hardware at Delta Mill Stores"
+                    fill
+                    className="object-cover opacity-90"
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                    priority
+                  />
+                </motion.div>
+                <div className="absolute inset-0 bg-gradient-to-t from-forge-950/80 via-forge-950/20 to-transparent" />
+                <div className="absolute bottom-4 left-4 flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 font-sans text-[0.65rem] font-medium text-white ring-1 ring-white/20 backdrop-blur-sm">
+                  <Gauge className="h-3.5 w-3.5 text-safety-orange" />
+                  Pressure-rated industrial stock
+                </div>
+              </div>
             </motion.div>
-          </motion.div>
+          </div>
 
-          {/* Right: Image with parallax */}
           <motion.div
-            initial={{ opacity: 0, x: 40 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.9, ease: EASE, delay: 0.25 }}
-            className="relative h-[300px] overflow-hidden border border-steel-500/30 md:h-[460px]"
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.5, duration: 0.5 }}
+            className="relative z-10 mt-8 grid grid-cols-2 gap-3 sm:grid-cols-4"
           >
-            <motion.div
-              className="absolute inset-0"
-              style={{ y: imageY, scale: imageScale }}
-            >
-              <Image
-                src="https://images.unsplash.com/photo-1581093458791-9d15482442f6?auto=format&fit=crop&w=1200&q=80"
-                alt="Industrial machinery equipment at Delta Mill Stores"
-                fill
-                className="object-cover opacity-80"
-                sizes="(max-width: 768px) 100vw, 50vw"
-                priority
-              />
-            </motion.div>
-            <div className="absolute inset-0 bg-gradient-to-t from-forge-950/70 via-transparent to-transparent" />
-            {/* Blueprint corner markers */}
-            <div className="absolute left-3 top-3 h-5 w-5 border-l-2 border-t-2 border-safety-orange/70" />
-            <div className="absolute right-3 top-3 h-5 w-5 border-r-2 border-t-2 border-safety-orange/70" />
-            <div className="absolute bottom-3 left-3 h-5 w-5 border-b-2 border-l-2 border-safety-orange/70" />
-            <div className="absolute bottom-3 right-3 h-5 w-5 border-b-2 border-r-2 border-safety-orange/70" />
-            {/* Spec label on image */}
-            <div className="absolute bottom-4 left-4 font-mono text-[0.6rem] tracking-[0.15em] text-safety-orange/80 uppercase">
-              Industrial Grade Equipment
-            </div>
-          </motion.div>
-        </div>
-      </div>
-
-      {/* Stats row */}
-      <motion.div
-        initial={{ opacity: 0, y: 16 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, delay: 0.75, ease: "easeOut" }}
-        className="border-t border-steel-500/20 bg-iron-800/60"
-      >
-        <div className="container">
-          <div className="grid grid-cols-2 divide-x divide-y divide-steel-500/20 md:grid-cols-4 md:divide-y-0">
-            {heroStats.map((stat) => (
-              <div key={stat.label} className="px-4 py-4 text-center">
-                <p className="font-display text-xl font-bold text-safety-orange md:text-2xl">
-                  {stat.value}
-                </p>
-                <p className="font-mono text-[0.6rem] uppercase tracking-[0.12em] text-steel-400">
-                  {stat.label}
-                </p>
+            {stats.map(({ value, label }) => (
+              <div
+                key={label}
+                className="rounded-2xl border border-white/10 bg-white/[0.05] px-4 py-3.5 text-center backdrop-blur-sm"
+              >
+                <p className="font-display text-xl font-bold text-safety-orange md:text-2xl">{value}</p>
+                <p className="font-sans text-[0.7rem] text-steel-300 mt-0.5">{label}</p>
               </div>
             ))}
-          </div>
-        </div>
-      </motion.div>
+          </motion.div>
+        </motion.div>
+      </div>
     </section>
   );
 }

@@ -3,11 +3,11 @@ import bcrypt from "bcryptjs";
 
 const prisma = new PrismaClient();
 
-const productImage = (id: string) =>
-  `https://images.unsplash.com/photo-${id}?w=600&h=400&fit=crop`;
+const productImage = (query: string) =>
+  `https://tse1.mm.bing.net/th?q=${encodeURIComponent(query)}&w=600&h=400&c=7&rs=1&p=0&o=5&pid=1.7`;
 
-const categoryImage = (id: string) =>
-  `https://images.unsplash.com/photo-${id}?w=800&h=600&fit=crop`;
+const categoryImage = (query: string) =>
+  `https://tse1.mm.bing.net/th?q=${encodeURIComponent(query)}&w=800&h=600&c=7&rs=1&p=0&o=5&pid=1.7`;
 
 const categories = [
   "Measurement Gauges & Fittings",
@@ -67,33 +67,33 @@ const categorySlugMap: Record<string, string> = {
 };
 
 const categoryImageMap: Record<(typeof categories)[number], string> = {
-  "Measurement Gauges & Fittings": categoryImage("1518709268805-4e9042af2176"),
-  "Valves & Valve Fittings": categoryImage("1581092160607-ee22621dd758"),
-  "Industrial Valves": categoryImage("1581092334651-ddf26d9a09d0"),
-  Bolts: categoryImage("1609205807107-e8ec2120f9de"),
-  Tapes: categoryImage("1567361808960-dec9cb578182"),
-  "Industrial Pump": categoryImage("1581093458791-9d15482442f6"),
-  "Industrial & Oil Seals": categoryImage("1504328345606-18bbc8c9d7d1"),
-  "Rubber & Rubber Products": categoryImage("1562259949-e8e7689d7828"),
+  "Measurement Gauges & Fittings": categoryImage("industrial pressure gauges fittings"),
+  "Valves & Valve Fittings": categoryImage("industrial valves and valve fittings"),
+  "Industrial Valves": categoryImage("industrial valve assembly"),
+  Bolts: categoryImage("steel bolts hardware"),
+  Tapes: categoryImage("industrial tape rolls"),
+  "Industrial Pump": categoryImage("industrial pump equipment"),
+  "Industrial & Oil Seals": categoryImage("industrial oil seals gasket"),
+  "Rubber & Rubber Products": categoryImage("industrial rubber products sheet"),
   "Insulators, Mineral Wool, Glass Wool & Insulation Materials": categoryImage(
-    "1518709594023-6eab9bab7b23",
+    "industrial insulation mineral wool glass wool",
   ),
-  Belts: categoryImage("1615906655593-ad0386982a0f"),
-  "Drilling Bits, Chucks & Collets": categoryImage("1581092160636-05e63c14b3b6"),
-  "Adhesives & Gum": categoryImage("1504148455328-c376907d081c"),
-  "HSS Drill Bits": categoryImage("1581092160636-05e63c14b3b6"),
-  Vices: categoryImage("1530124566582-a618bc2615dc"),
-  "Hydraulic & Pneumatic Tools": categoryImage("1567361808960-dec9cb578182"),
-  Adapter: categoryImage("1581092335878-5edd1d69a2dc"),
-  Compass: categoryImage("1454165804606-c3d57bc86b40"),
-  Bearings: categoryImage("1581092335878-5edd1d69a2dc"),
-  "Measuring Instruments & Equipment": categoryImage("1565043666747-69f6646db940"),
-  "Kitchen Linens": categoryImage("1521572163474-6864f9cf17ab"),
-  "Drill & Boring Equipment": categoryImage("1504148455328-c376907d081c"),
-  "Steel Pipes": categoryImage("1518709268805-4e9042af2176"),
-  Flanges: categoryImage("1621905251189-08b45d6a269e"),
-  Zippers: categoryImage("1521572163474-6864f9cf17ab"),
-  "Gearbox & Gear Parts": categoryImage("1581092160562-40aa08e78837"),
+  Belts: categoryImage("industrial conveyor belts"),
+  "Drilling Bits, Chucks & Collets": categoryImage("drill bits chucks collets"),
+  "Adhesives & Gum": categoryImage("industrial adhesive glue container"),
+  "HSS Drill Bits": categoryImage("hss drill bits metal"),
+  Vices: categoryImage("bench vice industrial tool"),
+  "Hydraulic & Pneumatic Tools": categoryImage("hydraulic pneumatic tools"),
+  Adapter: categoryImage("stainless steel hydraulic hex adapter fittings"),
+  Compass: categoryImage("engineering compass drawing tool"),
+  Bearings: categoryImage("steel ball bearings"),
+  "Measuring Instruments & Equipment": categoryImage("industrial measuring instruments"),
+  "Kitchen Linens": categoryImage("industrial belt lacing fasteners"),
+  "Drill & Boring Equipment": categoryImage("industrial drill machine"),
+  "Steel Pipes": categoryImage("steel pipes industrial"),
+  Flanges: categoryImage("steel pipe flanges"),
+  Zippers: categoryImage("roller chain industrial"),
+  "Gearbox & Gear Parts": categoryImage("industrial gearbox gears"),
 };
 
 type ProductSeed = {
@@ -380,40 +380,40 @@ const products: ProductSeed[] = [
 ];
 
 const productImageMap: Record<ProductSeed["slug"], string> = {
-  "h-guru-pressure-gauge": productImage("1518709268805-4e9042af2176"),
-  "analog-pressure-gauge": productImage("1565043666747-69f6646db940"),
-  "coley-temperature-gauge": productImage("1504328345606-18bbc8c9d7d1"),
-  "mitutoyo-analog-depth-gauge": productImage("1565043666747-69f6646db940"),
-  "stainless-steel-ball-valve": productImage("1581092160607-ee22621dd758"),
-  "galvanized-iron-globe-valve": productImage("1581092334651-ddf26d9a09d0"),
-  "cast-iron-globe-valve": productImage("1581092334651-ddf26d9a09d0"),
-  "pp-ball-valve": productImage("1581092160607-ee22621dd758"),
-  "audco-plug-valve": productImage("1581092334651-ddf26d9a09d0"),
-  "bucket-bolts": productImage("1609205807107-e8ec2120f9de"),
-  "stove-bolts": productImage("1621905251189-08b45d6a269e"),
-  "asbestos-metallic-tape": productImage("1567361808960-dec9cb578182"),
-  "teflon-tape": productImage("1504148455328-c376907d081c"),
-  "rotary-gear-pump": productImage("1581093458791-9d15482442f6"),
-  "hydraulic-pipe-pressure-test-pump": productImage("1581093458791-9d15482442f6"),
-  "high-pressure-jointing-sheets": productImage("1518709594023-6eab9bab7b23"),
-  "rubber-sheet": productImage("1562259949-e8e7689d7828"),
-  "asbestos-mill-boards": productImage("1518709594023-6eab9bab7b23"),
-  "belt-lacing": productImage("1615906655593-ad0386982a0f"),
-  "hand-drill-bit": productImage("1581092160636-05e63c14b3b6"),
-  "industrial-adhesive-gum": productImage("1504148455328-c376907d081c"),
-  "miranda-hss-tool-bit": productImage("1581092160636-05e63c14b3b6"),
-  "bench-vice": productImage("1530124566582-a618bc2615dc"),
-  "hydraulic-tool-kit": productImage("1567361808960-dec9cb578182"),
-  "stainless-steel-hydraulic-hex-adapter": productImage("1581092335878-5edd1d69a2dc"),
-  "engineering-compass": productImage("1454165804606-c3d57bc86b40"),
-  "stainless-steel-ball-bearings": productImage("1581092335878-5edd1d69a2dc"),
-  "residential-water-meter": productImage("1565043666747-69f6646db940"),
-  "belt-lacing-industrial": productImage("1615906655593-ad0386982a0f"),
-  "power-drill-machine": productImage("1504148455328-c376907d081c"),
-  "mild-steel-seamless-pipes": productImage("1518709268805-4e9042af2176"),
-  "stainless-steel-weld-neck-flanges": productImage("1621905251189-08b45d6a269e"),
-  "double-pitch-roller-chain": productImage("1518736114810-3f3bedfec66a"),
-  "gearbox-assembly": productImage("1581092160562-40aa08e78837"),
+  "h-guru-pressure-gauge": productImage("industrial pressure gauge"),
+  "analog-pressure-gauge": productImage("analog pressure gauge industrial"),
+  "coley-temperature-gauge": productImage("industrial temperature gauge"),
+  "mitutoyo-analog-depth-gauge": productImage("Mitutoyo analog depth gauge"),
+  "stainless-steel-ball-valve": productImage("stainless steel ball valve"),
+  "galvanized-iron-globe-valve": productImage("galvanized iron globe valve"),
+  "cast-iron-globe-valve": productImage("cast iron globe valve"),
+  "pp-ball-valve": productImage("polypropylene pp ball valve"),
+  "audco-plug-valve": productImage("industrial plug valve"),
+  "bucket-bolts": productImage("bucket bolts hardware"),
+  "stove-bolts": productImage("stove bolts hardware"),
+  "asbestos-metallic-tape": productImage("metallic insulation tape roll"),
+  "teflon-tape": productImage("ptfe teflon tape roll"),
+  "rotary-gear-pump": productImage("rotary gear pump industrial"),
+  "hydraulic-pipe-pressure-test-pump": productImage("hydraulic pressure test pump"),
+  "high-pressure-jointing-sheets": productImage("high pressure gasket jointing sheet"),
+  "rubber-sheet": productImage("industrial rubber sheet roll"),
+  "asbestos-mill-boards": productImage("thermal insulation millboard sheet"),
+  "belt-lacing": productImage("conveyor belt lacing fasteners"),
+  "hand-drill-bit": productImage("metal drill bit"),
+  "industrial-adhesive-gum": productImage("industrial adhesive container"),
+  "miranda-hss-tool-bit": productImage("HSS tool bit lathe"),
+  "bench-vice": productImage("bench vice tool"),
+  "hydraulic-tool-kit": productImage("hydraulic tool kit"),
+  "stainless-steel-hydraulic-hex-adapter": productImage("stainless steel hydraulic hex adapter fitting"),
+  "engineering-compass": productImage("engineering compass drawing tool"),
+  "stainless-steel-ball-bearings": productImage("stainless steel ball bearings"),
+  "residential-water-meter": productImage("residential water meter"),
+  "belt-lacing-industrial": productImage("industrial conveyor belt lacing"),
+  "power-drill-machine": productImage("power drill machine"),
+  "mild-steel-seamless-pipes": productImage("mild steel seamless pipes"),
+  "stainless-steel-weld-neck-flanges": productImage("stainless steel weld neck flange"),
+  "double-pitch-roller-chain": productImage("double pitch roller chain"),
+  "gearbox-assembly": productImage("industrial gearbox assembly"),
 };
 
 const employees = [

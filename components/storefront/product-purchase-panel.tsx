@@ -76,10 +76,10 @@ export function ProductPurchasePanel({ product, variants = [], initialEmail }: P
                     key={variant.id}
                     type="button"
                     onClick={() => setSelectedVariantId(variant.id)}
-                    className={`border px-3 py-1.5 font-mono text-xs tracking-[0.03em] transition-colors ${
+                    className={`rounded-full px-4 py-2 text-sm font-medium transition-all ${
                       isSelected
-                        ? "border-iron-800 bg-iron-800 text-alloy-white"
-                        : "border-steel-500/40 bg-alloy-white text-iron-800 hover:border-iron-800"
+                        ? "bg-iron-800 text-white shadow-sm"
+                        : "bg-surface-muted text-iron-800 hover:bg-steel-200"
                     } ${!variant.inStock ? "opacity-50" : ""}`}
                   >
                     {variant.name}

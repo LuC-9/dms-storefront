@@ -1,61 +1,74 @@
 "use client";
 
 import Link from "next/link";
-import { motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { ArrowRight, Truck, Clock } from "lucide-react";
+import { BentoCell, BentoGrid } from "@/components/storefront/bento-cell";
 
 export function CtaBanner() {
   return (
-    <section className="relative overflow-hidden bg-safety-orange">
-      {/* Subtle grid texture */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 opacity-[0.08]"
-        style={{
-          backgroundImage: `
-            linear-gradient(rgba(255,255,255,1) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(255,255,255,1) 1px, transparent 1px)
-          `,
-          backgroundSize: "40px 40px",
-        }}
-      />
-      <div className="container relative z-10 py-14 md:py-18">
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }}
-          viewport={{ once: true }}
-          className="flex flex-col items-center gap-6 text-center"
-        >
-          <p className="font-mono text-[0.65rem] uppercase tracking-[0.22em] text-orange-200">
-            Ready to order?
-          </p>
-          <h2 className="font-display text-3xl font-bold uppercase tracking-[0.03em] text-white md:text-4xl">
-            Industrial hardware,<br className="hidden sm:block" /> shipped from Kanpur
-          </h2>
-          <p className="max-w-lg text-sm leading-relaxed text-orange-100">
-            Browse our catalogue or contact our procurement team for bulk pricing,
-            custom orders, and stock availability.
-          </p>
-          <div className="flex flex-wrap justify-center gap-3">
-            <Button
-              asChild
-              className="rounded-none border border-white bg-white font-display uppercase tracking-[0.05em] text-safety-orange hover:bg-orange-50"
-            >
-              <Link href="/catalogue" className="flex items-center gap-2">
-                Browse catalogue <ArrowRight className="h-4 w-4" />
+    <section className="py-10 md:py-14">
+      <div className="container">
+        <BentoGrid>
+          <BentoCell span="2x2" variant="dark" className="!rounded-3xl ring-1 ring-steel-500/30">
+            <div className="pointer-events-none absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-safety-orange/70 to-transparent" />
+            <div className="relative flex h-full flex-col justify-center gap-5 p-6 md:p-10">
+              <p className="industrial-eyebrow !text-safety-orange">Dispatch · Kanpur valve supply</p>
+              <h2 className="font-display text-3xl font-bold leading-tight tracking-tight text-white md:text-4xl">
+                Valves, fittings &amp; hardware, shipped same day
+              </h2>
+              <p className="max-w-md text-sm leading-relaxed text-steel-300">
+                Browse pressure-rated stock or contact procurement for bulk B2B pricing and delivery schedules.
+              </p>
+              <div className="flex flex-wrap gap-2">
+                {["Ball valves", "Globe valves", "Flanges", "Gauges"].map((item) => (
+                  <span key={item} className="rounded-full border border-white/10 bg-white/[0.06] px-3 py-1 text-xs text-steel-200">
+                    {item}
+                  </span>
+                ))}
+              </div>
+              <div className="flex flex-wrap gap-3">
+                <Link href="/catalogue" className="btn-primary gap-2">
+                  Browse catalogue <ArrowRight className="h-4 w-4" />
+                </Link>
+                <Link href="/contact" className="btn-secondary border-white/20 bg-white/10 text-white hover:bg-white/20">
+                  Contact procurement
+                </Link>
+              </div>
+            </div>
+          </BentoCell>
+
+          <BentoCell span="1x1" variant="accent" className="!rounded-3xl">
+            <div className="flex h-full flex-col items-center justify-center gap-2 p-5 text-center">
+              <Truck className="h-6 w-6 text-white/90" />
+              <p className="font-display text-xl font-bold text-white">Same-day</p>
+              <p className="font-sans text-xs text-orange-100">Kanpur dispatch</p>
+            </div>
+          </BentoCell>
+
+          <BentoCell span="1x1" variant="accent" className="!bg-accent-600 !rounded-3xl">
+            <div className="flex h-full flex-col items-center justify-center gap-2 p-5 text-center">
+              <Clock className="h-6 w-6 text-white/90" />
+              <p className="font-display text-xl font-bold text-white">Before noon</p>
+              <p className="font-sans text-xs text-orange-100">Order cutoff</p>
+            </div>
+          </BentoCell>
+
+          <BentoCell span="2x1" variant="ghost" className="!rounded-3xl">
+            <div className="flex h-full flex-col justify-center gap-3 p-5 md:p-6">
+              <p className="industrial-eyebrow">About Delta Mill Stores</p>
+              <h3 className="font-display text-xl font-bold leading-tight text-iron-800 md:text-2xl">
+                Kanpur&apos;s trusted industrial supplier
+              </h3>
+              <p className="max-w-xl text-sm leading-relaxed text-steel-600">
+                Supplying valves, fittings, gauges, bearings, and machinery components to workshops,
+                OEM teams, and manufacturing plants across Uttar Pradesh since 1987.
+              </p>
+              <Link href="/about" className="inline-flex w-fit items-center gap-1 text-sm font-semibold text-safety-orange hover:underline">
+                Read more about us <ArrowRight className="h-3.5 w-3.5" />
               </Link>
-            </Button>
-            <Button
-              asChild
-              variant="ghost"
-              className="rounded-none border border-white/40 font-display uppercase tracking-[0.05em] text-white hover:bg-white/10"
-            >
-              <Link href="/contact">Contact us</Link>
-            </Button>
-          </div>
-        </motion.div>
+            </div>
+          </BentoCell>
+        </BentoGrid>
       </div>
     </section>
   );
