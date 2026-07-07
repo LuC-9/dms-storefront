@@ -107,7 +107,7 @@ Reference values live in `.env.example`.
 
 | Var | Purpose | Required? | Default |
 |---|---|---|---|
-| `DATABASE_URL` | Prisma database connection string | Yes | `file:./dev.db` |
+| `DATABASE_URL` | Prisma Postgres database connection string | Yes | Neon/Postgres URL with `sslmode=require` |
 | `NEXTAUTH_SECRET` | Signs JWT sessions and auth tokens | Yes | None |
 | `NEXTAUTH_URL` | Base URL for callbacks and reset-link generation | Yes | `http://localhost:3000` |
 | `RAZORPAY_KEY_ID` | Razorpay key id for gateway checkout | Only when using Razorpay | None |

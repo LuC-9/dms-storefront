@@ -127,7 +127,7 @@ The repository includes `.env.example` with the following variables:
 
 | Variable | Required | Description |
 |---|---|---|
-| `DATABASE_URL` | Yes | Prisma SQLite connection string. Defaults to a local file database such as `file:./dev.db`. |
+| `DATABASE_URL` | Yes | Prisma Postgres connection string, for example a Neon URL with `sslmode=require`. |
 | `NEXTAUTH_SECRET` | Yes | Secret used by NextAuth to sign and verify session tokens. Replace the placeholder with a strong random value. |
 | `NEXTAUTH_URL` | Yes | Base URL for NextAuth callbacks and session handling. Use `http://localhost:3000` in local development. |
 | `PAYMENT_PROVIDER` | No | Explicit payment provider override: `simulator` for local testing or `razorpay` for gateway-backed checkout. Defaults to `simulator` in development. |
