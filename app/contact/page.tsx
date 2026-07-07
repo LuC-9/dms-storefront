@@ -126,7 +126,7 @@ export default function ContactPage() {
                     <p className="mt-1 font-display text-lg font-semibold">
                       Mr. Vineet Awasthi
                     </p>
-                    <p className="text-sm text-steel-300">Proprietor, Delta Mill Stores</p>
+                    <p className="text-sm text-steel-300">Proprietor, Delta Mills Store</p>
                   </div>
                 </div>
               </div>
@@ -149,7 +149,7 @@ export default function ContactPage() {
                     Enquiry received
                   </p>
                   <p className="text-sm text-steel-500">
-                    Thank you for contacting Delta Mill Stores. We will get back to you within
+                    Thank you for contacting Delta Mills Store. We will get back to you within
                     one business day.
                   </p>
                 </motion.div>

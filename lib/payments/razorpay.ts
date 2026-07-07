@@ -72,7 +72,7 @@ async function createPaymentOrder(input: CreatePaymentInput): Promise<CreatePaym
       key: requireEnv("RAZORPAY_KEY_ID"),
       amount: input.order.totalInPaise,
       currency: input.order.currency,
-      name: "Delta Mill Stores",
+      name: "Delta Mills Store",
       description: `Order ${input.order.orderNumber}`,
       order_id: created.id,
       prefill: {

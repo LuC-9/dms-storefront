@@ -1,8 +1,8 @@
-# Delta Mill Store
+# Delta Mills Store
 
-> Full-stack industrial commerce platform for **Delta Mill Stores** - industrial hardware & machinery supplier in Kanpur, Uttar Pradesh, India.
+> Full-stack industrial commerce platform for **Delta Mills Store** - industrial hardware & machinery supplier in Kanpur, Uttar Pradesh, India.
 
-Delta Mill Store is a full-stack industrial commerce application for browsing products, managing customer carts and checkout, tracking orders and payments, and operating catalogue and employee workflows through an authenticated admin area. The project is built with Next.js App Router, TypeScript, Tailwind CSS, shadcn/ui-style components, Prisma, SQLite, NextAuth, Zod, and Vitest.
+Delta Mills Store is a full-stack industrial commerce application for browsing products, managing customer carts and checkout, tracking orders and payments, and operating catalogue and employee workflows through an authenticated admin area. The project is built with Next.js App Router, TypeScript, Tailwind CSS, shadcn/ui-style components, Prisma, Postgres, NextAuth, Zod, and Vitest.
 
 ## Features
 
@@ -91,7 +91,7 @@ The seeded admin account is intended for local development only. Change the cred
 
 ## Phase 3 - Storefront and Checkout Refinement
 
-Phase 3 builds on the Phase 2 commerce foundation with automatic guest-cart merge, a deterministic payment simulator for local checkout testing, and a full public-facing redesign aligned to Delta Mill Stores' industrial identity. Admin dashboard styling remains intentionally unchanged.
+Phase 3 builds on the Phase 2 commerce foundation with automatic guest-cart merge, a deterministic payment simulator for local checkout testing, and a full public-facing redesign aligned to Delta Mills Store's industrial identity. Admin dashboard styling remains intentionally unchanged.
 
 See `docs/PHASE2.md` for the commerce implementation guide and `docs/api/README.md` for the broader customer, checkout, payment, and admin API reference.
 
@@ -281,11 +281,11 @@ npm test
 
 ## Product catalogue
 
-The seeded catalogue includes **25 categories** and **34 products** spanning valves, gauges, pumps, drill bits, bearings, steel pipes, flanges, seals, adhesives, and other industrial hardware lines relevant to Delta Mill Stores. Seed data now maps every category and product to relevant Unsplash imagery rather than placeholder URLs.
+The seeded catalogue includes **25 categories** and **34 products** spanning valves, gauges, pumps, drill bits, bearings, steel pipes, flanges, seals, adhesives, and other industrial hardware lines relevant to Delta Mills Store. Seed data maps every category and product to relevant searched imagery rather than placeholder URLs.
 
 ## Store information
 
-- **Business**: Delta Mill Stores (also known as Delta Machinery Store)
+- **Business**: Delta Mills Store
 - **Contact**: Mr. Vineet Awasthi
 - **Phone**: [512-2362054](tel:5122362054)
 - **Address**: 78/45 Latouche Road, Anwar Ganj, Mulganj, Kanpur, Uttar Pradesh - 208001, India
@@ -308,6 +308,6 @@ The seeded catalogue includes **25 categories** and **34 products** spanning val
 
 ## License
 
-Private / internal use for Delta Mill Stores, Kanpur, India.
+Private / internal use for Delta Mills Store, Kanpur, India.
 
 Repository note: `package.json` currently declares `MIT`. If this project is intended to remain internal-only, align the package metadata before external distribution.

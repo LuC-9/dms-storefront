@@ -121,7 +121,7 @@ export default function ComparePage() {
     <div className="container py-8 md:py-12">
       <div className="mb-6 flex flex-wrap items-end justify-between gap-4">
         <div>
-          <p className="font-mono text-xs uppercase tracking-[0.1em] text-steel-500">Delta Mill Stores</p>
+          <p className="font-mono text-xs uppercase tracking-[0.1em] text-steel-500">Delta Mills Store</p>
           <h1 className="font-display text-4xl font-bold uppercase tracking-[0.05em] text-iron-800">
             Compare Products
           </h1>

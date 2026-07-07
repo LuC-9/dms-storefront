@@ -80,14 +80,14 @@ export async function PATCH(request: NextRequest, context: RouteContext) {
       subject: `Quote Update: ${statusLabel} — ${existing.product.name}`,
       html: `
         <div style="font-family:sans-serif;max-width:600px;margin:0 auto">
-          <h2 style="color:#1f2937">Quote Request Update — Delta Mill Stores</h2>
+          <h2 style="color:#1f2937">Quote Request Update — Delta Mills Store</h2>
           <p>Hello ${recipientName},</p>
           <p>Your quote request for <strong>${existing.product.name}</strong> has been updated to <strong>${statusLabel}</strong>.</p>
           ${priceHtml}
           ${adminNotesHtml}
           <p>Reference ID: <strong>${id}</strong></p>
           <hr style="border:none;border-top:1px solid #e5e7eb;margin:24px 0"/>
-          <p style="color:#9ca3af;font-size:12px">Delta Mill Stores — Industrial Hardware B2B</p>
+          <p style="color:#9ca3af;font-size:12px">Delta Mills Store — Industrial Hardware B2B</p>
         </div>
       `,
     }).catch((err: unknown) => {

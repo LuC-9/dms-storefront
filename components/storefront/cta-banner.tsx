@@ -55,7 +55,7 @@ export function CtaBanner() {
 
           <BentoCell span="2x1" variant="ghost" className="!rounded-3xl">
             <div className="flex h-full flex-col justify-center gap-3 p-5 md:p-6">
-              <p className="industrial-eyebrow">About Delta Mill Stores</p>
+              <p className="industrial-eyebrow">About Delta Mills Store</p>
               <h3 className="font-display text-xl font-bold leading-tight text-iron-800 md:text-2xl">
                 Kanpur&apos;s trusted industrial supplier
               </h3>

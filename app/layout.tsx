@@ -22,8 +22,8 @@ const monoFont = IBM_Plex_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Delta Mill Stores",
-  description: "Industrial hardware catalogue by Delta Mill Stores, Kanpur.",
+  title: "Delta Mills Store",
+  description: "Industrial hardware catalogue by Delta Mills Store, Kanpur.",
 };
 
 export default function RootLayout({

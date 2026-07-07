@@ -123,7 +123,7 @@ export function SiteHeader() {
           </span>
           <div className="hidden sm:block leading-tight">
             <span className="block font-display text-base font-bold uppercase tracking-wide text-white">
-              Delta Mill
+              Delta Mills
             </span>
             <span className="block font-mono text-[0.55rem] uppercase tracking-[0.2em] text-steel-400">
               Stores

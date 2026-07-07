@@ -52,13 +52,13 @@ export async function POST(request: NextRequest) {
       subject: `Quote Request Received — ${product.name}`,
       html: `
         <div style="font-family:sans-serif;max-width:600px;margin:0 auto">
-          <h2 style="color:#1f2937">Quote Request Received — Delta Mill Stores</h2>
+          <h2 style="color:#1f2937">Quote Request Received — Delta Mills Store</h2>
           <p>Hello ${recipientName},</p>
           <p>We have received your quote request for <strong>${product.name}</strong> (qty: ${payload.quantity}).</p>
           <p>Our team will review your request and get back to you shortly with a price quote.</p>
           <p>Reference ID: <strong>${quote.id}</strong></p>
           <hr style="border:none;border-top:1px solid #e5e7eb;margin:24px 0"/>
-          <p style="color:#9ca3af;font-size:12px">Delta Mill Stores — Industrial Hardware B2B</p>
+          <p style="color:#9ca3af;font-size:12px">Delta Mills Store — Industrial Hardware B2B</p>
         </div>
       `,
     }).catch((err: unknown) => {

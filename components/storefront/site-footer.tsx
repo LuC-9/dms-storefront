@@ -45,7 +45,7 @@ export function SiteFooter() {
             <span className="bg-safety-orange px-1.5 py-0.5 font-mono text-xs font-black tracking-tighter text-forge-950">DMS</span>
             <div>
               <p className="font-display text-xl font-extrabold uppercase tracking-[0.08em] text-alloy-white leading-none">
-                Delta Mill
+                Delta Mills
               </p>
               <p className="font-mono text-[0.6rem] uppercase tracking-[0.25em] text-safety-orange leading-none mt-1">
                 Stores
@@ -127,7 +127,7 @@ export function SiteFooter() {
       {/* Bottom bar */}
       <div className="border-t border-steel-500/10 bg-forge-950 py-6 relative z-10">
         <div className="container flex flex-col items-center justify-between gap-4 text-xs text-steel-500 sm:flex-row">
-          <p>© {new Date().getFullYear()} Delta Mill Stores. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} Delta Mills Store. All rights reserved.</p>
           <div className="flex items-center gap-4 font-mono text-[10px] tracking-[0.1em] text-steel-500 uppercase">
             <span>SYS-VER: DMS-14.2.0</span>
             <span className="hidden sm:inline">//</span>

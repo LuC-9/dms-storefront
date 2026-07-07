@@ -9,7 +9,7 @@
 
 ### Changed
 - Customer authentication flows now merge guest cart contents from `localStorage` into the server-side cart, using the higher quantity for overlapping products and surfacing skipped items via toast feedback.
-- Public-facing storefront pages now use the Delta Mill industrial design system, including the new palette, Oswald and IBM Plex typography, square interactive controls, responsive layouts, reduced-motion handling, and Specification Plate metadata treatment.
+- Public-facing storefront pages now use the Delta Mills Store industrial design system, including the new palette, Oswald and IBM Plex typography, square interactive controls, responsive layouts, reduced-motion handling, and Specification Plate metadata treatment.
 - Seeded catalogue media now uses relevant Unsplash imagery across all 25 categories and 34 products instead of placeholder image URLs.
 
 ## [Phase 2] - 2026-07-04

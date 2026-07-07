@@ -6,7 +6,7 @@ import { ArrowRight, MapPin, Package, ShieldCheck, Truck, Users, Wrench } from "
 import { Reveal, Stagger, StaggerItem } from "@/components/storefront/reveal";
 
 const milestones = [
-  { year: "1987", event: "Delta Mill Stores founded on Latouche Road, Kanpur." },
+  { year: "1987", event: "Delta Mills Store founded on Latouche Road, Kanpur." },
   { year: "1995", event: "Expanded catalogue to include precision instruments and gauges." },
   { year: "2005", event: "Introduced B2B wholesale channel for OEM maintenance teams." },
   { year: "2018", event: "Launched same-day dispatch from our Anwar Ganj warehouse." },
@@ -39,7 +39,7 @@ export default function AboutPage() {
                   Built around dependable industrial supply.
                 </h1>
                 <p className="max-w-xl text-base leading-relaxed text-steel-200">
-                  Delta Mill Stores helps workshops, maintenance teams, and manufacturers source valves,
+                  Delta Mills Store helps workshops, maintenance teams, and manufacturers source valves,
                   fittings, bearings, pumps, and hardware with practical guidance and fast availability.
                 </p>
                 <div className="flex flex-wrap gap-3">
@@ -78,7 +78,7 @@ export default function AboutPage() {
               <h2 className="section-heading mt-2">A practical partner for procurement teams</h2>
               <div className="space-y-4 text-sm leading-relaxed text-steel-500">
                 <p>
-                  Delta Mill Stores, also known as Delta Machinery Store, is a trusted supplier
+                  Delta Mills Store is a trusted supplier
                   and retailer of industrial hardware, machinery components, and precision
                   instruments. Located on Latouche Road in Anwar Ganj, Kanpur, we have been
                   serving industrial buyers, engineers, and workshops across Uttar Pradesh and

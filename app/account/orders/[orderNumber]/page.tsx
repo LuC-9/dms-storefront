@@ -93,7 +93,7 @@ export default function AccountOrderDetailPage() {
   return (
     <div className="space-y-6 border border-steel-500/30 bg-alloy-white p-4 md:p-6">
       <div className="border-b border-steel-300/80 pb-4">
-        <p className="font-mono text-xs uppercase tracking-[0.1em] text-steel-500">Delta Mill Store dispatch note</p>
+        <p className="font-mono text-xs uppercase tracking-[0.1em] text-steel-500">Delta Mills Store dispatch note</p>
         <div className="mt-2 flex flex-wrap items-center justify-between gap-4">
           <div>
             <h1 className="font-display text-3xl font-bold uppercase tracking-[0.08em] md:text-4xl">{order.orderNumber}</h1>

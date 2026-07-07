@@ -15,7 +15,7 @@ type ShippingAddress = {
   gstin?: string | null;
 };
 
-const COMPANY_NAME = "Delta Mill Stores";
+const COMPANY_NAME = "Delta Mills Store";
 const COMPANY_ADDRESS = "78/45 Latouche Road, Anwar Ganj, Kanpur - 208001";
 const COMPANY_GSTIN = "09AAAAA0000A1Z5";
 const DEFAULT_HSN = "8481";

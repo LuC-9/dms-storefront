@@ -44,7 +44,7 @@ function createTransport(): Transporter {
 }
 
 const transporter = createTransport();
-const FROM = process.env.SMTP_FROM ?? "Delta Mill Stores <noreply@deltamill.in>";
+const FROM = process.env.SMTP_FROM ?? "Delta Mills Store <noreply@deltamill.in>";
 const isPreview = !process.env.SMTP_HOST;
 
 export async function sendEmail({ to, subject, html }: SendEmailOptions): Promise<void> {
@@ -75,7 +75,7 @@ export async function sendOrderConfirmationEmail(order: OrderEmailData): Promise
 
   const html = `
     <div style="font-family:sans-serif;max-width:600px;margin:0 auto">
-      <h2 style="color:#1f2937">Order Confirmed — Delta Mill Stores</h2>
+      <h2 style="color:#1f2937">Order Confirmed — Delta Mills Store</h2>
       <p>Hello ${recipientName},</p>
       <p>Your order <strong>#${order.orderNumber}</strong> has been received and is being processed.</p>
       <table style="width:100%;border-collapse:collapse;margin:16px 0">
@@ -91,13 +91,13 @@ export async function sendOrderConfirmationEmail(order: OrderEmailData): Promise
       <p style="font-size:16px"><strong>Order Total: ${formatRupees(order.totalInPaise)}</strong></p>
       <p style="color:#6b7280;font-size:13px">You will receive another email when your order ships.</p>
       <hr style="border:none;border-top:1px solid #e5e7eb;margin:24px 0"/>
-      <p style="color:#9ca3af;font-size:12px">Delta Mill Stores — Industrial Hardware B2B</p>
+      <p style="color:#9ca3af;font-size:12px">Delta Mills Store — Industrial Hardware B2B</p>
     </div>
   `;
 
   await sendEmail({
     to: recipientEmail,
-    subject: `Order Confirmed #${order.orderNumber} — Delta Mill Stores`,
+    subject: `Order Confirmed #${order.orderNumber} — Delta Mills Store`,
     html,
   });
 }
@@ -123,19 +123,19 @@ export async function sendOrderStatusEmail(
 
   const html = `
     <div style="font-family:sans-serif;max-width:600px;margin:0 auto">
-      <h2 style="color:#1f2937">Order Update — Delta Mill Stores</h2>
+      <h2 style="color:#1f2937">Order Update — Delta Mills Store</h2>
       <p>Hello ${recipientName},</p>
       <p>Your order <strong>#${order.orderNumber}</strong> status has been updated to <strong>${statusLabel}</strong>.</p>
       <p>Order Total: ${formatRupees(order.totalInPaise)}</p>
       <p style="color:#6b7280;font-size:13px">If you have any questions, please contact our support team.</p>
       <hr style="border:none;border-top:1px solid #e5e7eb;margin:24px 0"/>
-      <p style="color:#9ca3af;font-size:12px">Delta Mill Stores — Industrial Hardware B2B</p>
+      <p style="color:#9ca3af;font-size:12px">Delta Mills Store — Industrial Hardware B2B</p>
     </div>
   `;
 
   await sendEmail({
     to: recipientEmail,
-    subject: `Order Update #${order.orderNumber}: ${statusLabel} — Delta Mill Stores`,
+    subject: `Order Update #${order.orderNumber}: ${statusLabel} — Delta Mills Store`,
     html,
   });
 }

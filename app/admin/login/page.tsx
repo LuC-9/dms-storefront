@@ -20,7 +20,7 @@ export default function AdminLoginPage() {
       <Card>
         <CardHeader>
           <div className="flex items-center justify-between gap-2">
-            <CardTitle>Delta Mill Stores</CardTitle>
+            <CardTitle>Delta Mills Store</CardTitle>
             <Badge className="bg-steel-200 text-steel-800">Staff portal</Badge>
           </div>
           <p className="text-sm text-steel-600">Admin Login</p>

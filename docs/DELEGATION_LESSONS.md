@@ -1,6 +1,6 @@
-# Delegation Lessons Learned - Delta Mill Store
+# Delegation Lessons Learned - Delta Mills Store
 
-## Project: Delta Mill Store E-Commerce Platform
+## Project: Delta Mills Store E-Commerce Platform
 **Repository**: https://github.com/LuC-9/dms-storefront  
 **Date**: July 2026  
 **Status**: Delivered but process violated

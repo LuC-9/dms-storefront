@@ -8,7 +8,7 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
           href="/"
           className="inline-flex font-display text-xl font-semibold uppercase tracking-[0.05em] text-iron-800"
         >
-          Delta Mill
+          Delta Mills Store
         </Link>
       </div>
       {children}

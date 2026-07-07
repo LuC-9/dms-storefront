@@ -2,7 +2,7 @@
 
 ## Overview
 
-Phase 2 turns Delta Mill Store from a catalogue-first application into a commerce flow with customer accounts, persistent carts, checkout, payments, order tracking, and role-gated admin order operations.
+Phase 2 turns Delta Mills Store from a catalogue-first application into a commerce flow with customer accounts, persistent carts, checkout, payments, order tracking, and role-gated admin order operations.
 
 What shipped:
 

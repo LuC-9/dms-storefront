@@ -83,7 +83,7 @@ export function Hero() {
                 >
                   <Image
                     src="https://images.unsplash.com/photo-1504148455328-c376907d081c?w=1200&h=800&fit=crop"
-                    alt="Industrial valves and hardware at Delta Mill Stores"
+                    alt="Industrial valves and hardware at Delta Mills Store"
                     fill
                     className="object-cover opacity-90"
                     sizes="(max-width: 768px) 100vw, 50vw"

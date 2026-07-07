@@ -579,7 +579,7 @@ async function main() {
         bonus: bonus + 5000,
         deductions,
         netPaid: employee.baseSalary + bonus + 5000 - deductions,
-        notes: "Current cycle payroll for Delta Mill Stores.",
+        notes: "Current cycle payroll for Delta Mills Store.",
       },
     });
 
