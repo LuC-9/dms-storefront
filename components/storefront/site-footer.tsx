@@ -48,7 +48,7 @@ export function SiteFooter() {
                 Delta Mills
               </p>
               <p className="font-mono text-[0.6rem] uppercase tracking-[0.25em] text-safety-orange leading-none mt-1">
-                Stores
+                Store
               </p>
             </div>
           </div>

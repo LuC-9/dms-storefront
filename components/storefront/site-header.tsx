@@ -126,7 +126,7 @@ export function SiteHeader() {
               Delta Mills
             </span>
             <span className="block font-mono text-[0.55rem] uppercase tracking-[0.2em] text-steel-400">
-              Stores
+              Store
             </span>
           </div>
         </Link>
